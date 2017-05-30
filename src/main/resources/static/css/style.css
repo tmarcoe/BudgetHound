@@ -1,0 +1,642 @@
+/*-----------------------
+Define commonly used colors
+-------------------------*/
+:root {
+	--orage-gold: #bbbbff;
+	--coffee-dark: #ffca95;
+	--page-heading: #ffffff;
+	--text-color: #ffffff;
+	--nav-bar: #066815;
+	--bkgrnd-color: #eee;
+	--shadow-color: #83615c;
+	--menu-hover: #0fe12f;
+	--title-color: #ffffff;
+	--light-text: #ffffff;
+	--light-background: #b7ffb7;
+}
+/* -----------------------
+Base styles
+------------------------*/
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	color: #333;
+	background-color: var(--bkgrnd-color:);
+	font: 1em/1.2 "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 .5em;
+	font-weight: 500;
+	line-height: 1.1;
+}
+
+h1 {
+	font-size: 2.25em;
+} /* 36px */
+h2 {
+	font-size: 1.75em;
+} /* 28px */
+h3 {
+	font-size: 1.375em;
+} /* 22px */
+h4 {
+	font-size: 1.125em;
+} /* 18px */
+h5 {
+	font-size: 1em;
+} /* 16px */
+h6 {
+	font-size: .875em;
+} /* 14px */
+p {
+	margin: 0 0 1.5em;
+	line-height: 1.5;
+}
+th {
+	color: var(--light-text);
+}
+hr {
+	display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: double;
+    border-width: 4px;
+    border-color: #c9c4e3;
+}
+
+blockquote {
+	padding: 1em 2em;
+	margin: 0 0 2em;
+	border-left: 5px solid #eee;
+}
+
+hr {
+	height: 0;
+	margin-top: 1em;
+	margin-bottom: 2em;
+	border: 0;
+	border-top: 1px solid #000000;
+}
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    font-size: 12px;
+    color: initial;
+}
+a:link {
+	color: royalblue;
+}
+
+a:visited {
+	color: #fdb14a;
+}
+
+a:focus {
+	color: black;
+}
+
+a:hover {
+	color: var(--menu-hover);
+}
+
+a:active {
+	color: red;
+}
+
+/* -----------------------
+Layout styles
+------------------------*/
+@font-face{
+    font-family: "Pacifico";
+    src: url('ttfonts/Pacifico/Pacifico-Regular.ttf');
+}
+@font-face{
+	font-family: "JosefinSans-Bold";	
+	src: url('ttfonts/Josefin_Sans/JosefinSans-Bold.ttf');
+}
+@font-face{
+	font-family: "JosefinSans-BoldItalic";	
+	src: url('ttfonts/Josefin_Sans/JosefinSans-BoldItalic.ttf');
+}
+@font-face{
+	font-family: "JosefinSans-Italic";	
+	src: url('ttfonts/Josefin_Sans/JosefinSans-Italic.ttf');
+}
+@font-face{
+	font-family: "JosefinSans-Light";	
+	src: url('ttfonts/Josefin_Sans/JosefinSans-Light.ttf');
+}
+@font-face{
+	font-family: "JosefinSans-LightItalic";	
+	src: url('ttfonts/Josefin_Sans/JosefinSans-LightItalic.ttf');
+}
+@font-face{
+	font-family: "JosefinSans-Regular";	
+	src: url('ttfonts/Josefin_Sans/JosefinSans-Regular.ttf');
+}
+@font-face{
+	font-family: "JosefinSans-SemiBold";	
+	src: url('ttfonts/Josefin_Sans/JosefinSans-SemiBold.ttf');
+}
+@font-face{
+	font-family: "JosefinSans-SemiBoldItalic";	
+	src: url('ttfonts/Josefin_Sans/JosefinSans-SemiBoldItalic.ttf');
+}
+@font-face{
+	font-family: "JosefinSans-Thin";	
+	src: url('ttfonts/Josefin_Sans/JosefinSans-Thin.ttf');
+}
+@font-face{
+	font-family: "JosefinSans-ThinItalic";	
+	src: url('ttfonts/Josefin_Sans/JosefinSans-ThinItalic.ttf');
+}
+@font-face{	
+	font-family: "Metamorphous";	
+	src: url('ttfonts/Metamorphous/Metamorphous-Regular.ttf');
+}
+.container {
+	color: var(--title-color);
+	max-width: 100em;
+	margin: 0;
+	padding: 0;
+}
+
+.heading {
+	color: var(--title-color);
+	padding: .5em;
+	font-size: 2.25em;
+	font-style: italic;
+	text-align: center;
+	text-shadow: 2px 2px 4px var(--shadow-color);
+}
+
+.header-heading {
+	margin: 0;
+}
+
+.nav-bar {
+	background: var(--nav-bar);
+	padding: 0;
+	margin: 0;
+	font-size: 12px;
+}
+.menu-items {
+	float: right;
+	margin: 0 0;
+	box-shadow: 2px 2px 2px var(--shadow-color);
+}
+
+/* -----------------------
+Nav
+------------------------*/
+.nav {
+	margin: 0;
+	padding: 0;
+	list-style: inline;
+}
+
+.nav li {
+	display: inline;
+	margin: 0;
+}
+
+.nav a {
+	display: block;
+	padding: 0em 1.25em;
+	color: #fff;
+	text-decoration: none;
+	border-bottom: 1px solid gray;
+}
+
+.nav a:link {
+	color: white;
+}
+
+.nav a:visited {
+	color: white;
+}
+
+.nav a:focus {
+	color: black;
+	background-color: white;
+}
+
+.nav a:hover {
+	color: white;
+	background-color: var(--menu-hover);
+}
+
+.nav a:active {
+	color: white;
+	background-color: red;
+}
+
+.side-menu {
+	margin: 0;
+	padding: 0;
+	list-style: circle;
+}
+.side-menu li {
+	display: block;
+	margin: 0;
+}
+
+.side-menu a {
+	display: block;
+	padding: 0em 1.25em;
+	color: #fff;
+	text-decoration: none;
+	border-bottom: 1px solid gray;
+}
+
+.side-menu a:link {
+	color: #fde1ce;
+}
+
+.side-menu a:visited {
+	color: #db9717;
+}
+
+.side-menu a:focus {
+	color: black;
+	background-color: white;
+}
+
+.side-menu a:hover {
+	color: white;
+	background-color: green;
+}
+
+.side-menu a:active {
+	color: white;
+	background-color: red;
+}
+
+/* -----------------------
+Single styles
+------------------------*/
+.img-responsive {
+	max-width: 100%;
+}
+
+.logo {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+}
+
+.btn {
+	color: #fff !important;
+	background-color: royalblue;
+	border-color: #222;
+	display: inline-block;
+	padding: .5em 1em;
+	margin-bottom: 0;
+	font-weight: 400;
+	line-height: 1.2;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: .2em;
+	text-decoration: none;
+}
+
+.btn:hover {
+	color: #fff !important;
+	background-color: green;
+}
+
+.btn:focus {
+	color: #fff !important;
+	background-color: black;
+}
+
+.btn:active {
+	color: #fff !important;
+	background-color: red;
+}
+
+.table {
+	width: 100%;
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+
+.list-unstyled {
+	padding-left: 0;
+	list-style: none;
+}
+
+.list-inline {
+	padding-left: 0;
+	margin-left: -5px;
+	list-style: none;
+}
+
+.list-inline>li {
+	display: inline-block;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+/* -----------------------
+Wide styles
+------------------------*/
+@media ( min-width : 42em) {
+	.header {
+		padding: 1.5em 3em;
+	}
+	.nav-bar {
+		padding: 1em 3em;
+	}
+	.content {
+		padding: 2em 3em;
+	}
+	.footer {
+		padding: 2em 3em;
+	}
+	.nav li {
+		display: inline;
+		margin: 0 1em 0 0;
+	}
+	.nav a {
+		display: inline;
+		padding: 0;
+		border-bottom: 0;
+	}
+}
+
+.content {
+	min-height: 80%;
+	background: url(../images/dollar.jpg) no-repeat;
+	margin: 0;
+	width: 94%;
+}
+
+.footer {
+	color: #ffffff;
+	background: var(--nav-bar);
+  	height: 15px;
+  	margin-top: -10px;
+	float: bottom;
+	font-size: 10px;	
+}
+
+.error {
+	color: red;
+	font-size: 12px
+}
+
+.valid {
+	color: green;
+	font-size: 12px;
+}
+
+
+.paging {
+	text-align: center;
+	padding: 0 .75em;
+	font-size: 10px
+}
+
+.paging li
+{
+	
+	display: inline;
+}
+div.pageheading
+{
+	color: var(--coffee-dark);
+}
+div.category {
+	text-align: center;
+	font-size: 20px;
+}
+
+.tableview
+{
+	border-collapse: collapse;
+	font-size: 12px;
+}
+/***********************************************************
+ * List tables 
+ * These are the specifications for list tables
+ ***********************************************************/
+
+table.tableview tr:nth-child(odd)
+{
+	background: #dedbee;
+}
+table.tableview tr:nth-child(even)
+{
+	background: #fbfbff;
+}
+table.tableview th
+{
+	background: #f5f3c2;
+	color: black;
+}
+
+tfoot.tablefooter td 
+{
+	background: #bfd9e6;
+	color: #000000;
+	font-size: 12px;
+	font-weight: 900;
+	text-align: right;
+}
+
+fieldset {
+	float: left;
+	display: block;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border: 4px ridge #808080;
+}
+
+
+
+.standout th
+{
+	background-color: var(--light-text);
+}
+.logos{
+	padding-top: 0em;
+	float: right;
+	margin: 0 0;
+	clear: right;
+	}
+.rightside {
+	float: right;
+}
+.lightBackground {
+	background-color: var(--light-background);
+	color: black;
+}
+.leftside {
+	float: left;
+	clear: both;
+}
+table.rightside td {
+	vertical-align: text-bottom;	
+}
+table.leftside td {
+	vertical-align: text-bottom;
+}
+.label {
+	font-weight: 900;
+}
+.shadow 
+{
+	box-shadow:  2px 2px 4px var(--shadow-color);
+}
+.dark-text th {
+	color: black;
+}
+div.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+}
+.modal-content {
+	background: -webkit-linear-gradient(#d5e6ee, white);
+	/* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#d5e6ee, white);
+	/* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#d5e6ee, white);
+	/* For Firefox 3.6 to 15 */
+	background: linear-gradient(#d5e6ee, white);
+	/* Standard syntax (must be last) */
+    margin: 15% auto; /* 15% from the top and centered */
+	box-shadow: 10px 10px 5px var(--shadow-color);
+    padding: 20px;
+    border: 1px solid #888;
+    width: 45%; /* Could be more or less, depending on screen size */
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+	background: none;
+	
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;   
+
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.centerHeading {
+	text-align: center;
+}
+.divshadow {
+	box-shadow: 10px 10px 5px var(--shadow-color);
+}
+.pieChart {
+	height: 500px;
+	width: 500px;	
+}
+.lineChart {
+	height: 500px;
+	width: 1000px;	
+}
+.barChart {
+	height: 500px;
+	width: 1000px		
+}
+.reportCharts {
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	border: 1px solid black;
+}
+.buttonTable {
+	padding-top: 1.5em;
+}
+.searchEngine {
+	width: 50px;
+	height: 5px;
+}
+.searchBox {
+    border-color: #004220;
+	width:10px;
+	height: 5px;
+  }
+.wordWrap {
+	padding: 1em 1em 1em 1em;
+	width: 500px;
+	height: 300px;
+	word-break: break-all;
+	word-wrap: break-word;
+	text-align: left;
+	border: 1px solid black;	
+}
+.microlight {
+    font-family : monospace;
+    white-space : pre;
+}
+.editContainer {
+	border: 1px solid black;
+}
+
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+}
+.titleText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+table.leftJustify th{
+	text-align: left;
+}
+.altFont {
+	font-family: JosefinSans-SemiBold;
+}
+.tableBorder td{
+	border: 1px solid black;
+}
+.centerTable {
+	width: 80%;
+	margin: 0 auto;
+}
+.lightText {
+	color: var(--light-text);
+	font-size: 1.75em;
+}
