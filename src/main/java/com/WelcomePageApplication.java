@@ -2,19 +2,38 @@ package com;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+
+import org.apache.tomcat.jdbc.pool.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = { "com.dao", "com.entity", "com.service", "com.controllers", "com.config",
 		"com.rest" })
-public class WelcomePageApplication {
+public class WelcomePageApplication implements CommandLineRunner  {
+	
+    @Autowired
+    DataSource dataSource;
 
 	public static void main(String[] args) throws IOException, URISyntaxException {
+
+		SpringApplication.run(WelcomePageApplication.class, args);
+		//WelcomePageApplication.launchBrowser();
+	}
+	
+	@Override
+    public void run(String... args) throws Exception {
+
+        System.out.println("DATASOURCE = " + dataSource);
+
+    }
+	
+	public static void launchBrowser() throws IOException {
 		String url = "http://localhost:8080";
 		String os = System.getProperty("os.name").toLowerCase();
 		Runtime rt = Runtime.getRuntime();
-
-		SpringApplication.run(WelcomePageApplication.class, args);
+		
 		if (os.indexOf("win") >= 0) {
 			rt.exec("rundll32 url.dll,FileProtocolHandler " + url);
 		} else if (os.indexOf("mac") >= 0) {
@@ -30,5 +49,7 @@ public class WelcomePageApplication {
 
 			rt.exec(new String[] { "sh", "-c", cmd.toString() });
 		}
+	
 	}
+
 }

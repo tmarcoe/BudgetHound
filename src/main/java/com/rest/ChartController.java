@@ -13,25 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.entity.Category;
 import com.helper.BudgetPercentages;
-import com.service.CategoryService;
-import com.service.WithdrawalService;
 
 @RestController
 @RequestMapping(value = "/data-service", method = RequestMethod.GET)
 public class ChartController {
 	
-	@Autowired
-	WithdrawalService withdrawalService;
-	
-	@Autowired
-	CategoryService categoryService;
-	
 	@RequestMapping("/budget")
 	public String getBudget(@ModelAttribute("month") int month, @ModelAttribute("year") int year) throws JSONException {
-		List<Category> cat = categoryService.retrieveRawList();
-		List<BudgetPercentages> bp = withdrawalService.getBudgetBreakdown(cat, month, year);
+		//List<Category> cat = categoryService.retrieveRawList();
+		//List<BudgetPercentages> bp = withdrawalService.getBudgetBreakdown(cat, month, year);
 	
 		JSONObject json = new JSONObject();
 		JSONArray datasets = new JSONArray();
@@ -41,12 +32,12 @@ public class ChartController {
 		
 		json.put("type", "pie");
 		json.put("data", data);
-		data.put("labels", getLabels(bp));
+		//data.put("labels", getLabels(bp));
 		data.put("datasets", datasets);
 		datasets.put(d1);
 		d1.put("label", "Budget Breakdown By Category");
-		d1.put("backgroundColor", getColorPalette(bp.size(), 20));
-		d1.put("data", getDataPoints(bp));
+		//d1.put("backgroundColor", getColorPalette(bp.size(), 20));
+		//d1.put("data", getDataPoints(bp));
 		json.put("options", options);
 		options.put("responsive", false);
 		options.put("display", true);

@@ -5,79 +5,37 @@
 <tiles-definitions>
 
 	<!-- Templates -->
-	
+
 	<definition name="layout.basic" template="/WEB-INF/templates/default.jsp">
-		<put-attribute name="title" value="Spring Web MVC with Tiles 3" />
-		<put-attribute name="heading_title" value=""></put-attribute>
-		<put-attribute name="toolbar" value="/WEB-INF/tiles/toolbar.jsp"></put-attribute>
-		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+		<put-attribute name="includes" value=""></put-attribute>
+		<put-attribute name="title" value="BudgetHound" />
+		<put-attribute name="heading_title" value="" />
+		<put-attribute name="toolbar" value="/WEB-INF/tiles/static/toolbar.jsp" />
+		<put-attribute name="header" value="/WEB-INF/tiles/static/header.jsp" />
 		<put-attribute name="content" value="" />
-		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/static/footer.jsp" />
 	</definition>
-	
-	<!-- Pages -->	
-	
-	<definition name="homepagejsp" extends="layout.basic">
-		<put-attribute name="title" value="Budget Hound (Home)" />
-	    <put-attribute name="content" value="/WEB-INF/tiles/home.jsp" />
-		<put-attribute name="heading_title" value="Budget Hound"></put-attribute>
-		<put-attribute name="footer" value="/WEB-INF/tiles/pageinator.jsp" />
+
+	<!-- Pages -->
+
+	<definition name="home" extends="layout.basic">
+		<put-attribute name="title" value="Budget Hound" />
+		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp" />
+		<put-attribute name="heading_title" value="Budget Hound" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/static/pageinator.jsp" />
 	</definition>
-	
-	<definition name="createTransactionJsp" extends="layout.basic">
-		<put-attribute name="title" value="Enter Transaction" />
-		<put-attribute name="content" value="/WEB-INF/tiles/createtransaction.jsp" />
-		<put-attribute name="heading_title" value="Enter Transaction"></put-attribute>
+
+	<definition name="error" extends="layout.basic">
+		<put-attribute name="title" value="Budget Hound" />
+		<put-attribute name="content" value="/WEB-INF/tiles/error.jsp" />
+		<put-attribute name="heading_title" value="Budget Hound" />
 	</definition>
-	
-	<definition name="editTransactionJsp" extends="layout.basic">
-		<put-attribute name="title" value="Edit Transaction" />
-		<put-attribute name="content" value="/WEB-INF/tiles/edittrans.jsp" />
-		<put-attribute name="heading_title" value="Edit Transaction"></put-attribute>
+
+	<definition name="access-denied" extends="layout.basic">
+		<put-attribute name="title" value="Access Denied" />
+		<put-attribute name="content" value="/WEB-INF/tiles/access-denied.jsp" />
+		<put-attribute name="heading_title" value="Budget Hound" />
 	</definition>
-	
-	<definition name="createcategoryjsp" extends="layout.basic">
-		<put-attribute name="title" value="Enter New Category" />
-		<put-attribute name="content" value="/WEB-INF/tiles/newcategory.jsp" />
-		<put-attribute name="heading_title" value="Enter New Category"></put-attribute>
-	</definition>
-	
-	<definition name="newSubCategoryjsp" extends="layout.basic">
-		<put-attribute name="title" value="Enter New SubCategory" />
-		<put-attribute name="content" value="/WEB-INF/tiles/newsubcategory.jsp" />
-		<put-attribute name="heading_title" value="Enter New SubCategory"></put-attribute>
-	</definition>
-	
-	<definition name="depositsJsp" extends="layout.basic">
-		<put-attribute name="title" value="Budget Hound (Deposits)" />
-	    <put-attribute name="content" value="/WEB-INF/tiles/deposits.jsp" />
-		<put-attribute name="heading_title" value="Budget Hound"></put-attribute>
-		<put-attribute name="footer" value="/WEB-INF/tiles/pageinator.jsp" />
-	</definition>
-	
-	<definition name="addDepositJsp" extends="layout.basic">
-		<put-attribute name="title" value="Budget Hound (Deposits)" />
-	    <put-attribute name="content" value="/WEB-INF/tiles/newdeposit.jsp" />
-		<put-attribute name="heading_title" value="Budget Hound"></put-attribute>
-	</definition>
-		
-	<definition name="editDepositJsp" extends="layout.basic">
-		<put-attribute name="title" value="Budget Hound (Deposits)" />
-	    <put-attribute name="content" value="/WEB-INF/tiles/editdeposit.jsp" />
-		<put-attribute name="heading_title" value="Budget Hound"></put-attribute>
-	</definition>
-		
-	<definition name="pieChartJsp" extends="layout.basic">
-		<put-attribute name="title" value="Budget Breakdown" />
-	    <put-attribute name="content" value="/WEB-INF/tiles/piechart.jsp" />
-		<put-attribute name="heading_title" value="Budget Breakdown"></put-attribute>
-	</definition>
-		
-		<definition name="monthAndYearJsp" extends="layout.basic">
-		<put-attribute name="title" value="Choose The Month and Year" />
-	    <put-attribute name="content" value="/WEB-INF/tiles/monthandyear.jsp" />
-		<put-attribute name="heading_title" value="Choose The Month and Year"></put-attribute>
-	</definition>
-		
-			
+
+
 </tiles-definitions>

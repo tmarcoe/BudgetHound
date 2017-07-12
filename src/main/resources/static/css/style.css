@@ -2,116 +2,25 @@
 Define commonly used colors
 -------------------------*/
 :root {
-	--orage-gold: #bbbbff;
-	--coffee-dark: #ffca95;
-	--page-heading: #ffffff;
-	--text-color: #ffffff;
-	--nav-bar: #066815;
+	--light-peach: #ffddaa;
+	--coffee-dark: #804000;
+	--odd-rows: #dedbee;
+	--even-rows: #fbfbff;
+	--heading-row: #f5f3c2;
+	--footer-background: #bfd9e6;
+	--page-heading: #000000;
+	--text-color: #000000;
 	--bkgrnd-color: #eee;
 	--shadow-color: #83615c;
 	--menu-hover: #0fe12f;
 	--title-color: #ffffff;
 	--light-text: #ffffff;
 	--light-background: #b7ffb7;
-}
-/* -----------------------
-Base styles
-------------------------*/
-html, body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	color: #333;
-	background-color: var(--bkgrnd-color:);
-	font: 1em/1.2 "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-	margin: 0 0 .5em;
-	font-weight: 500;
-	line-height: 1.1;
-}
-
-h1 {
-	font-size: 2.25em;
-} /* 36px */
-h2 {
-	font-size: 1.75em;
-} /* 28px */
-h3 {
-	font-size: 1.375em;
-} /* 22px */
-h4 {
-	font-size: 1.125em;
-} /* 18px */
-h5 {
-	font-size: 1em;
-} /* 16px */
-h6 {
-	font-size: .875em;
-} /* 14px */
-p {
-	margin: 0 0 1.5em;
-	line-height: 1.5;
-}
-th {
-	color: var(--light-text);
-}
-hr {
-	display: block;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: double;
-    border-width: 4px;
-    border-color: #c9c4e3;
-}
-
-blockquote {
-	padding: 1em 2em;
-	margin: 0 0 2em;
-	border-left: 5px solid #eee;
-}
-
-hr {
-	height: 0;
-	margin-top: 1em;
-	margin-bottom: 2em;
-	border: 0;
-	border-top: 1px solid #000000;
-}
-a.button {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-
-    text-decoration: none;
-    font-size: 12px;
-    color: initial;
-}
-a:link {
-	color: royalblue;
-}
-
-a:visited {
-	color: #fdb14a;
-}
-
-a:focus {
-	color: black;
-}
-
-a:hover {
-	color: var(--menu-hover);
-}
-
-a:active {
-	color: red;
+	--light-shadow: rgba(0,0,0,0.2);
 }
 
 /* -----------------------
-Layout styles
+Special fonts
 ------------------------*/
 @font-face{
     font-family: "Pacifico";
@@ -161,20 +70,108 @@ Layout styles
 	font-family: "Metamorphous";	
 	src: url('ttfonts/Metamorphous/Metamorphous-Regular.ttf');
 }
+
+
+/* -----------------------
+Base styles
+------------------------*/
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	color: #333;
+	background-color: #eee;
+	font: 1em/1.2 "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 .5em;
+	font-weight: 500;
+	line-height: 1.1;
+}
+
+h1 {
+	font-size: 2.25em;
+} /* 36px */
+h2 {
+	font-size: 1.75em;
+} /* 28px */
+h3 {
+	font-size: 1.375em;
+} /* 22px */
+h4 {
+	font-size: 1.125em;
+} /* 18px */
+h5 {
+	font-size: 1em;
+} /* 16px */
+h6 {
+	font-size: .875em;
+} /* 14px */
+p {
+	margin: 0 0 1.5em;
+	line-height: 1.5;
+}
+
+blockquote {
+	padding: 1em 2em;
+	margin: 0 0 2em;
+	border-left: 5px solid #eee;
+}
+strong {
+	font-style: italic;
+	color: red;
+}
+hr {
+	height: 0;
+	margin-top: 1em;
+	margin-bottom: 2em;
+	border: 0;
+	border-top: 1px solid #000000;
+}
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    font-size: 12px;
+    color: initial;
+}
+a:link {
+	color: royalblue;
+}
+
+a:visited {
+	color: #fdb14a;
+}
+
+a:focus {
+	color: black;
+}
+
+a:hover {
+	color: green;
+}
+
+a:active {
+	color: red;
+}
+
 .container {
-	color: var(--title-color);
 	max-width: 100em;
 	margin: 0;
 	padding: 0;
 }
 
 .heading {
-	color: var(--title-color);
+	color: var(--coffee-dark);
+	background: var(--light-peach);
 	padding: .5em;
-	font-size: 2.25em;
+	font-size: 31px;
 	font-style: italic;
 	text-align: center;
-	text-shadow: 2px 2px 4px var(--shadow-color);
+	text-shadow: 2px 2px 4px #83615c;
 }
 
 .header-heading {
@@ -182,7 +179,7 @@ Layout styles
 }
 
 .nav-bar {
-	background: var(--nav-bar);
+	background: var(--coffee-dark);
 	padding: 0;
 	margin: 0;
 	font-size: 12px;
@@ -190,7 +187,7 @@ Layout styles
 .menu-items {
 	float: right;
 	margin: 0 0;
-	box-shadow: 2px 2px 2px var(--shadow-color);
+	box-shadow: 2px 2px 2px #83615c;
 }
 
 /* -----------------------
@@ -230,7 +227,7 @@ Nav
 
 .nav a:hover {
 	color: white;
-	background-color: var(--menu-hover);
+	background-color: green;
 }
 
 .nav a:active {
@@ -376,15 +373,20 @@ Wide styles
 }
 
 .content {
-	min-height: 80%;
-	background: url(../images/dollar.jpg) no-repeat;
-	margin: 0;
-	width: 94%;
+	min-height: 70%;
+	background: -webkit-linear-gradient(#d5e6ee, white);
+	/* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#d5e6ee, white);
+	/* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#d5e6ee, white);
+	/* For Firefox 3.6 to 15 */
+	background: linear-gradient(#d5e6ee, white);
+	/* Standard syntax (must be last) */
 }
 
 .footer {
 	color: #ffffff;
-	background: var(--nav-bar);
+	background: var(--coffee-dark);
   	height: 15px;
   	margin-top: -10px;
 	float: bottom;
@@ -401,7 +403,39 @@ Wide styles
 	font-size: 12px;
 }
 
+table.inventoryDetails td {
+	padding: 20px;
+}
 
+.dailyspecials td th {
+	padding: 0 20px;
+	vertical-align: text-bottom;
+}
+
+.ljsecond th:nth-child(2) {
+	text-align: left;
+}
+
+.rjthird td:nth-child(3) {
+	text-align: right;
+}
+
+.rjthird th:nth-child(3) {
+	text-align: right;
+}
+
+
+.addaccount {
+	font-size: 14px;
+}
+
+.accountheader {
+	font-size: 30px;
+}
+
+.inventoryheader {
+	font-size: 30px;
+}
 .paging {
 	text-align: center;
 	padding: 0 .75em;
@@ -413,15 +447,61 @@ Wide styles
 	
 	display: inline;
 }
+.invoiceItemDetails td
+{
+	padding: 1em;	
+	vertical-align: bottom;
+}
+.invoicedetail td
+{
+	padding: 2em;
+}
+.currency
+{
+	text-align: right;
+}
 div.pageheading
 {
+	text-align: center;
 	color: var(--coffee-dark);
+}
+table.signup td
+{
+	padding: 0;
+	text-align: left;
 }
 div.category {
 	text-align: center;
 	font-size: 20px;
 }
 
+table.catlist td
+{
+	text-align: center;
+	font-size: 14px;
+	padding-right: 2em;
+	vertical-align: bottom;
+}
+table.catlist
+{
+    margin-left:auto; 
+    margin-right:auto;
+	vertical-align: bottom;
+}
+
+.invoicehead td
+{
+	background: #f5f3c2;
+	font-weight: bold;
+}
+
+.productdetails td 
+{
+	padding: 0 .5em;
+	text-align: left;
+	vertical-align: text-top;
+	vertical-align: top;
+}
 .tableview
 {
 	border-collapse: collapse;
@@ -434,25 +514,140 @@ div.category {
 
 table.tableview tr:nth-child(odd)
 {
-	background: #dedbee;
+	background: var(--odd-rows);
 }
 table.tableview tr:nth-child(even)
 {
-	background: #fbfbff;
+	background: var(--even-rows);
 }
 table.tableview th
 {
-	background: #f5f3c2;
-	color: black;
+	background: var(--heading-row);
 }
 
 tfoot.tablefooter td 
 {
-	background: #bfd9e6;
+	background: var(--footer-background);
 	color: #000000;
 	font-size: 12px;
 	font-weight: 900;
 	text-align: right;
+}
+
+/*The specifics for each table*/
+#employeelist td {
+	text-align: center;
+}
+#tmview td {
+	text-align: center;
+}
+
+#shoppingtable td
+{
+	text-align: left;
+	padding: .5em;
+    border-width:2px;  
+    border-style:solid;
+}
+#shoppingtable td:nth-child(2)
+{
+		text-align: right;
+}
+
+#viewsurvey 
+{
+	vertical-align: bottom;
+	box-shadow:  0px 8px 16px 0px var(--light-shadow);
+}
+
+#viewledger td
+{
+	padding: 0 2em;
+	border: 1px solid black;
+}
+#listusers td { 
+	border: 1px solid black;
+}
+#listusers td:nth-child(4) {
+	text-align: right;
+}
+
+#listaccounts td {
+	border: 1px solid black;
+}
+#listaccounts td:nth-child(3) {
+	text-align: right;
+}
+#listaccounts td:nth-child(4) {
+	text-align: center;
+}
+#pCash 
+{
+	text-align: center;
+}
+#listinventory
+{
+	text-align: center;
+}
+#viewsurvey td
+{
+	text-align: center;
+}
+
+#listinvoice 
+{
+	font-size: 12px;
+}
+
+#listinvoice td:nth-child(4)
+{
+	text-align: right;
+}
+#listinvoice td:nth-child(5)
+{
+	text-align: right;
+}
+#listinvoice td
+{
+	padding: 0 1em;
+
+}
+
+#viewheader td
+{
+	padding: 0 2em;
+	border: 1px solid black;
+}
+#viewheader
+{
+	font-size: 12px;
+}
+#viewheader td:nth-child(4)
+{
+	text-align: right;
+}
+#activities td {
+	border: 1px solid black;
+}
+.viewreturns td {
+	text-align: right;	
+	padding: 0 2.5em;
+}
+
+.viewcouponfoot
+{
+
+	background: #ffffff;
+}
+
+/***********************************************
+ * Shopping List
+ *
+ ***********************************************/
+table.productlist td
+{
+	padding: 0 .5em;
+	vertical-align: text-bottom;
 }
 
 fieldset {
@@ -466,12 +661,85 @@ fieldset {
     padding-right: 0.75em;
     border: 4px ridge #808080;
 }
+.printorders {
+	float: center;
+}
+.returns {
+border-collapse: collapse;	
+}
+.returns td {
+	text-align: right;	
+	padding: 0 2.5em;
+	
+}
 
+.rmadetails {
+	border-collapse: collapse;	
+}
+table.rmadetails th {
+	background: #f5f3c2;
+}
+table.rmadetails td, th {
+	text-align: left;
+	padding: 0 2.5em;	
+}
+table.rmadetails caption{
+	font-weight: bold;
+	background: #a6a6ff;
+}
+hr {
+	display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: double;
+    border-width: 4px;
+    border-color: #c9c4e3;
+}
+table.getRma td, th {
+	text-align: left;
+	padding: 0 2.5em;	
+}
+table.returns-status td, th {
+	text-align: left;
+	padding: 0 2.5em;	
+	
+}
+.contact caption {
+	font-weight: bold;
+	font-size: 18px;
+	padding: 1em;
+}
 
-
-.standout th
+table.pcinfoTable td, th{
+	text-align: right;
+	
+}
+.paymentRadio
 {
-	background-color: var(--light-text);
+	display: block;
+}
+.shoppingtable
+{
+	border-collapse: collapse;
+	font-size: 12px;	
+}
+
+.coupontable td, th {
+	text-align: left;
+}
+
+.standout
+{
+	background-color: #f0c575;
+}
+.disclaimer
+{
+	float: right;
+	margin: 0 0;
+	border: 4px ridge #808080;
+	box-shadow: 2px 2px 2px #83615c;
 }
 .logos{
 	padding-top: 0em;
@@ -481,10 +749,6 @@ fieldset {
 	}
 .rightside {
 	float: right;
-}
-.lightBackground {
-	background-color: var(--light-background);
-	color: black;
 }
 .leftside {
 	float: left;
@@ -496,15 +760,28 @@ table.rightside td {
 table.leftside td {
 	vertical-align: text-bottom;
 }
+.userinfo {
+	box-shadow: 0px 8px 16px 0px var(--light-shadow);
+	margin-right: 2em;
+	margin-top: .5em;
+}
 .label {
 	font-weight: 900;
 }
 .shadow 
 {
-	box-shadow:  2px 2px 4px var(--shadow-color);
+	box-shadow:  0px 8px 16px 0px var(--light-shadow);
 }
-.dark-text th {
-	color: black;
+table.surveytable td
+{
+	padding-right: 3em;
+	padding-bottom: 0;
+	font-size: 12px;
+}
+
+table.audittable td:nth-child(2)
+{
+	text-align: right;
 }
 div.modal {
     display: none; /* Hidden by default */
@@ -517,6 +794,7 @@ div.modal {
     overflow: auto; /* Enable scroll if needed */
 }
 .modal-content {
+	text-align: center;
 	background: -webkit-linear-gradient(#d5e6ee, white);
 	/* For Safari 5.1 to 6.0 */
 	background: -o-linear-gradient(#d5e6ee, white);
@@ -526,12 +804,33 @@ div.modal {
 	background: linear-gradient(#d5e6ee, white);
 	/* Standard syntax (must be last) */
     margin: 15% auto; /* 15% from the top and centered */
-	box-shadow: 10px 10px 5px var(--shadow-color);
+	box-shadow: 0px 8px 16px 0px var(--light-shadow);
     padding: 20px;
     border: 1px solid #888;
-    width: 45%; /* Could be more or less, depending on screen size */
-}
 
+}
+.small-modal {
+	width: 20%; /* Could be more or less, depending on screen size */
+}
+.medium-modal {
+	width: 45%;
+}
+.large-modal {
+	width: 70%
+}
+.page-centered {
+   position: absolute;
+   top: 50%;
+   margin-top: -150px; /*half of #content height*/
+   left: 0;
+   width: 100%;
+}
+.div-centered {
+   width: 250px;
+   margin-left: auto;
+   margin-right: auto;
+   height: 395px;
+}
 .spinner {
     width: 20px;
     height: 20px;
@@ -565,7 +864,7 @@ div.modal {
 	text-align: center;
 }
 .divshadow {
-	box-shadow: 10px 10px 5px var(--shadow-color);
+	box-shadow: 0px 8px 16px 0px var(--light-shadow);
 }
 .pieChart {
 	height: 500px;
@@ -582,7 +881,6 @@ div.modal {
 .reportCharts {
 	width: 100%;
 	height: 100%;
-	background-color: white;
 	border: 1px solid black;
 }
 .buttonTable {
@@ -613,7 +911,9 @@ div.modal {
 .editContainer {
 	border: 1px solid black;
 }
-
+.editor {
+	
+}
 .CodeMirror {
   border: 1px solid #eee;
   height: auto;
@@ -627,16 +927,88 @@ table.leftJustify th{
 	text-align: left;
 }
 .altFont {
-	font-family: JosefinSans-SemiBold;
+	font-family: JosefinSans-Regular;
 }
-.tableBorder td{
+.dropbtn {
+    background-color: var(--coffee-dark);
+    color: white;
+    padding: 1px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+}
+.dropbtn:hover {
+	background-color: green;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--coffee-dark);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px var(--light-shadow);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: green}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+.indent {
+	padding-left: 4cm;
+}
+.tableborder td {
 	border: 1px solid black;
 }
-.centerTable {
-	width: 80%;
-	margin: 0 auto;
+.tableshadow {
+	box-shadow: 0px 8px 16px 0px var(--light-shadow);
+	height: 5px;
+}
+#pbar {
+	width: 175px;
+	background-color: transparent;
+}
+#pStrength {
+	width: 0%;
+	height: 5px;
+	background-color: #ff0000;
+}
+.login-table {
+	box-shadow: 0px 8px 16px 0px var(--light-shadow);	
+}
+.login-table td{
+	padding: .5em;
+	width: 100%;
+
 }
 .lightText {
-	color: var(--light-text);
-	font-size: 1.75em;
+	color: white;
+	font-style: oblique;
+}
+.login-label {
+	font-family: JosefinSans-Regular;
+	align: center;
+	width: 100%;
+	background-color: var(--coffee-dark);
+	/*box-shadow: 0px 0px 16px 0px var(--coffee-dark);*/
+	color: white;
+	text-align: center;
+	padding: 1em;
 }
