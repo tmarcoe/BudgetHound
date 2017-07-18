@@ -21,6 +21,7 @@ public class Register implements Serializable{
 	private double withdrawal;
 	private double deposit;
 	private String category;
+	private double running_balance;
 	
 	public int getEntry_id() {
 		return entry_id;
@@ -70,7 +71,10 @@ public class Register implements Serializable{
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	
-	
-
+	public double getRunning_balance() {
+		return running_balance;
+	}
+	public void setRunning_balance(double running_balance) {
+		this.running_balance = running_balance;
+	}
 }

@@ -22,7 +22,7 @@ public class Household implements Serializable {
 	private int num_adults;
 	private int num_children;
 	private String password;
-	private String email;
+	private String username;
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "household_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
@@ -30,12 +30,14 @@ public class Household implements Serializable {
 	private String city;
 	private String community;
 	private String region;
+	private double start_balance;
+	private boolean enabled;
 	
-	public int getEntry_id() {
+	public int getHousehold_id() {
 		return household_id;
 	}
-	public void setEntry_id(int entry_id) {
-		this.household_id = entry_id;
+	public void setHousehold_id(int household_id) {
+		this.household_id = household_id;
 	}
 	public String getName() {
 		return name;
@@ -61,11 +63,11 @@ public class Household implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public Set<Role> getRoles() {
 		return roles;
@@ -97,5 +99,16 @@ public class Household implements Serializable {
 	public void setRegion(String region) {
 		this.region = region;
 	}
-	
+	public double getStart_balance() {
+		return start_balance;
+	}
+	public void setStart_balance(double start_balance) {
+		this.start_balance = start_balance;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}	
 }

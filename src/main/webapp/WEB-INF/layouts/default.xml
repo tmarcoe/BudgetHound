@@ -7,8 +7,8 @@
 	<!-- Templates -->
 
 	<definition name="layout.basic" template="/WEB-INF/templates/default.jsp">
-		<put-attribute name="includes" value=""></put-attribute>
-		<put-attribute name="title" value="BudgetHound" />
+		<put-attribute name="includes" value="" />
+		<put-attribute name="title" value="Budget Hound" />
 		<put-attribute name="heading_title" value="" />
 		<put-attribute name="toolbar" value="/WEB-INF/tiles/static/toolbar.jsp" />
 		<put-attribute name="header" value="/WEB-INF/tiles/static/header.jsp" />
@@ -21,21 +21,59 @@
 	<definition name="home" extends="layout.basic">
 		<put-attribute name="title" value="Budget Hound" />
 		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp" />
-		<put-attribute name="heading_title" value="Budget Hound" />
-		<put-attribute name="footer" value="/WEB-INF/tiles/static/pageinator.jsp" />
+		<put-attribute name="heading_title" value="" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/static/homefooter.jsp" />
 	</definition>
 
 	<definition name="error" extends="layout.basic">
-		<put-attribute name="title" value="Budget Hound" />
+		<put-attribute name="title" value="Error" />
 		<put-attribute name="content" value="/WEB-INF/tiles/error.jsp" />
-		<put-attribute name="heading_title" value="Budget Hound" />
+		<put-attribute name="heading_title" value="Error" />
 	</definition>
 
 	<definition name="access-denied" extends="layout.basic">
 		<put-attribute name="title" value="Access Denied" />
 		<put-attribute name="content" value="/WEB-INF/tiles/access-denied.jsp" />
-		<put-attribute name="heading_title" value="Budget Hound" />
+		<put-attribute name="heading_title" value="Access Denied" />
+	</definition>
+	<definition name="signup" extends="layout.basic">
+		<put-attribute name="title" value="Sign Up" />
+		<put-attribute name="heading_title" value="Sign Up" />
+		<put-attribute name="includes" value="/WEB-INF/tiles/signupscript.jsp" />
+		<put-attribute name="content" value="/WEB-INF/tiles/signup.jsp" />
 	</definition>
 
+	<definition name="login" extends="layout.basic">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="heading_title" value="Login" />
+		<put-attribute name="content" value="/WEB-INF/tiles/login.jsp" />
+	</definition>
+	
+	<definition name="createtrans" extends="layout.basic">
+		<put-attribute name="title" value="Create Transaction" />
+		<put-attribute name="heading_title" value="Create Transaction" />
+		<put-attribute name="content" value="/WEB-INF/tiles/createtrans.jsp" />
+	</definition>
+	<definition name="listtrans" extends="layout.basic">
+		<put-attribute name="title" value="Register" />
+		<put-attribute name="heading_title" value="Register" />
+		<put-attribute name="content" value="/WEB-INF/tiles/listtrans.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/static/pageinator.jsp" />
+	</definition>
+	<definition name="edittrans" extends="layout.basic">
+		<put-attribute name="title" value="Edit Transaction" />
+		<put-attribute name="heading_title" value="Edit Transaction" />
+		<put-attribute name="content" value="/WEB-INF/tiles/edittrans.jsp" />
+	</definition>
+	<definition name="picksubcategory" extends="layout.basic">
+		<put-attribute name="title" value="Pick A Subcategory" />
+		<put-attribute name="heading_title" value="Pick A Subcategory" />
+		<put-attribute name="content" value="/WEB-INF/tiles/picksubcategory.jsp" />
+	</definition>
+	<definition name="listcategories" extends="layout.basic">
+		<put-attribute name="title" value="Categories" />
+		<put-attribute name="heading_title" value="Categories" />
+		<put-attribute name="content" value="/WEB-INF/tiles/listcategories.jsp" />
+	</definition>
 
 </tiles-definitions>

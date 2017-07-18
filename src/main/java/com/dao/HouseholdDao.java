@@ -42,6 +42,14 @@ public class HouseholdDao implements IHousehold {
 		return household;
 	}
 
+	public Household retrieve(String username) {
+		Session session = session();
+		Household household = (Household) session.createCriteria(Household.class).add(Restrictions.eq("username", username)).uniqueResult();
+		session.disconnect();
+		
+		return household;
+	}
+	
 	@Override
 	public void update(Household household) {
 		Session session = session();
