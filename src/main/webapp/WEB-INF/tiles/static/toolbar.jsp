@@ -15,6 +15,7 @@
 				<li><a href="/logout">logout</a></li>
 				<li><a href="/user/root/listtrans">View Transactions</a></li>
 				<li><a href="/user/root/listcategories">Categories</a></li>
+				<li><a href="/user/root/archive">Archive Last Month</a></li>
 			</sec:isAuthenticated>			
 		</ul>
 	</div>

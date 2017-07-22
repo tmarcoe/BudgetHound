@@ -376,7 +376,7 @@ Wide styles
 }
 
 .content {
-	min-height: 70%;
+	min-height: 80%;
 	background: -webkit-linear-gradient(var(--start-color),var(--end-color));
 	/* For Safari 5.1 to 6.0 */
 	background: -o-linear-gradient(var(--start-color), var(--end-color));

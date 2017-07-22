@@ -62,6 +62,16 @@ public class CategoriesDao implements ICategories {
 		
 		return catList;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Categories> retrieveByParent(int household_id, String parent) {
+		Session session = session();
+		String hql = "FROM Categories WHERE household_id = :household_id AND parent = :parent";
+		List<Categories> catList = session.createQuery(hql).setInteger("household_id", household_id).setString("parent", parent).list();
+		session.disconnect();
+		
+		return catList;
+	}
 	@SuppressWarnings("unchecked")
 	public List<Categories> retrieveList(int household_id, String category) {
 		Session session = session();
@@ -110,10 +120,19 @@ public class CategoriesDao implements ICategories {
 	@Override
 	public void delete(Categories categories) {
 		Session session = session();
+		String hql = "DELETE FROM Categories WHERE id = :id";
 		Transaction tx = session.beginTransaction();
-		session.delete(categories);
+		session.createQuery(hql).setInteger("id", categories.getId()).executeUpdate();
 		tx.commit();
 		session.disconnect();
+	}
+
+	public boolean hasSubCateories(int household_id, String category) {
+		Session session = session();
+		String hql = "SELECT COUNT(*) FROM Categories WHERE household_id = :household_id AND parent = :category";
+		long count = (long) session.createQuery(hql).setInteger("household_id", household_id).setString("category", category).uniqueResult();
+		
+		return (count > 0);
 	}
 
 }

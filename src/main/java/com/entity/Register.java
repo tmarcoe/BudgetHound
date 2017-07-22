@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class Register implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -16,6 +18,7 @@ public class Register implements Serializable{
 	private int entry_id;
 	private int household_id;
 	private Date trans_date;
+	@NotBlank
 	private String recipient;
 	private String description;
 	private double withdrawal;

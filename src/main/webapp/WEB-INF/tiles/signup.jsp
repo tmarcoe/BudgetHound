@@ -16,6 +16,20 @@
 			<td><sf:input path="username" /></td>
 		</tr>
 		<tr>
+			<td><div class="error">
+					<sf:errors path="name" />
+				</div></td>
+			<td><div class="error">
+					<sf:errors path="num_adults" />
+				</div></td>
+			<td><div class="error">
+					<sf:errors path="num_children" />
+				</div></td>
+			<td><div class="error">
+					<sf:errors path="username" />
+				</div></td>
+		</tr>
+		<tr>
 			<td colspan="4"><hr>
 			<td>
 		</tr>
@@ -31,7 +45,20 @@
 			<td><sf:input path="city" /></td>
 			<td><sf:input path="region" /></td>
 			<td><sf:input path="country" /></td>
-			<td><sf:input path="start_balance" /></td>
+		</tr>
+		<tr>
+			<td><div class="error">
+					<sf:errors path="community" />
+				</div></td>
+			<td><div class="error">
+					<sf:errors path="city" />
+				</div></td>
+			<td><div class="error">
+					<sf:errors path="region" />
+				</div></td>
+			<td><div class="error">
+					<sf:errors path="country" />
+				</div></td>
 		</tr>
 		<tr>
 			<td colspan="4"><hr>
@@ -49,11 +76,15 @@
 				<div id="pbar">
 					<label id="pLabel"></label>
 					<div id="pStrength"></div>
-				</div>
-				&nbsp;
+				</div> &nbsp;
 			</td>
 			<td>&nbsp;</td>
 			<td><div id="matchpass"></div></td>
+		</tr>
+		<tr>
+			<td><div class="error">
+					<sf:errors path="password" />
+				</div></td>
 		</tr>
 		<tr>
 			<td><sf:button type="submit">Save</sf:button></td>

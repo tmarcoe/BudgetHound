@@ -50,6 +50,15 @@ public class HouseholdDao implements IHousehold {
 		return household;
 	}
 	
+	public boolean exists(String username) {
+		Session session = session();
+		String hql = "SELECT COUNT(*) FROM Household WHERE username = :username";
+		
+		long count = (long) session.createQuery(hql).setString("username", username).uniqueResult();
+		
+		return (count > 0);
+	}
+	
 	@Override
 	public void update(Household household) {
 		Session session = session();

@@ -71,7 +71,7 @@ function onLoad() {
 			return false;
 		}
 		if (password != confirmpass) {
-			alert("<fmt:message key='UnmatchedPasswords.userProfile.password' />")
+			alert("<fmt:message key='UnmatchedPasswords.household.password' />")
 			return false;
 		} else {
 			return true;
@@ -85,11 +85,11 @@ function onLoad() {
 		if (password.length > 3 || confirmpass.length > 3) {
 
 			if (password == confirmpass) {
-				$("#matchpass").text("<fmt:message key='MatchedPasswords.userProfile.password'/>");
+				$("#matchpass").text("<fmt:message key='MatchedPasswords.household.password'/>");
 				$("#matchpass").addClass("valid");
 				$("#matchpass").removeClass("error");
 			} else {
-				$("#matchpass").text("<fmt:message key='UnmatchedPasswords.userProfile.password' />");
+				$("#matchpass").text("<fmt:message key='UnmatchedPasswords.household.password' />");
 				$("#matchpass").addClass("error");
 				$("#matchpass").removeClass("valid");
 			}

@@ -24,6 +24,26 @@
 			</sf:select>
 			</td>
 		</tr>
+		<tr>
+			<td><div class="error">
+				<sf:errors path="trans_date" />
+			</div></td>
+			<td><div class="error">
+				<sf:errors path="recipient" />
+			</div></td>
+			<td><div class="error">
+				<sf:errors path="description" />
+			</div></td>
+			<td><div class="error">
+				<sf:errors path="withdrawal" />
+			</div></td>
+			<td><div class="error">
+				<sf:errors path="deposit" />
+			</div></td>
+			<td><div class="error">
+				<sf:errors path="category" />
+			</div></td>
+		</tr>
 		<tr><td><sf:button type="submit">Save</sf:button></td></tr>
 	</table>
 

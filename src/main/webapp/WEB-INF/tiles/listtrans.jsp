@@ -5,6 +5,7 @@
 
 
 <table  class="tableview tableshadow tableborder rjfourth rjfifth rjsixth">
+	<caption>Parent: ${parent}</caption>
 	<tr>
 		<th>Date</th>
 		<th>Source/Recipient</th>

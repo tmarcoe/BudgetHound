@@ -1,5 +1,6 @@
 package com.rest;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,21 +9,32 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.helper.BudgetPercentages;
+import com.entity.Categories;
+import com.entity.Household;
+import com.service.HouseholdService;
+import com.service.RegisterService;
 
 @RestController
 @RequestMapping(value = "/data-service", method = RequestMethod.GET)
 public class ChartController {
 	
-	@RequestMapping("/budget")
-	public String getBudget(@ModelAttribute("month") int month, @ModelAttribute("year") int year) throws JSONException {
-		//List<Category> cat = categoryService.retrieveRawList();
-		//List<BudgetPercentages> bp = withdrawalService.getBudgetBreakdown(cat, month, year);
+	@Autowired
+	RegisterService registerService;
+	
+	@Autowired
+	HouseholdService householdService;
+	
+	@RequestMapping("/{parent}/budget")
+	public String getBudget(@PathVariable("parent") String parent, Principal principal) throws JSONException {
+		
+		Household household = householdService.retrieve(principal.getName());
+		List<Categories> cat = registerService.budgetBreakdown(household.getHousehold_id(), parent);
+		
 	
 		JSONObject json = new JSONObject();
 		JSONArray datasets = new JSONArray();
@@ -32,12 +44,12 @@ public class ChartController {
 		
 		json.put("type", "pie");
 		json.put("data", data);
-		//data.put("labels", getLabels(bp));
+		data.put("labels", getLabels(cat));
 		data.put("datasets", datasets);
 		datasets.put(d1);
 		d1.put("label", "Budget Breakdown By Category");
-		//d1.put("backgroundColor", getColorPalette(bp.size(), 20));
-		//d1.put("data", getDataPoints(bp));
+		d1.put("backgroundColor", getColorPalette(cat.size(), 20));
+		d1.put("data", getDataPoints(cat));
 		json.put("options", options);
 		options.put("responsive", false);
 		options.put("display", true);
@@ -47,21 +59,25 @@ public class ChartController {
 		
 	}
 	
-	private String [] getLabels(List<BudgetPercentages> bp) {
+	private String [] getLabels(List<Categories> bp) {
 		List<String> labels = new ArrayList<String>();
 		
-		for (BudgetPercentages budget : bp) {
-			labels.add(String.format("%s (%.2f%%)", budget.getCategory(), budget.getPercent()));
+		for (Categories budget : bp) {
+			if (budget.getPercentage() > 0) {
+				labels.add(String.format("%s (%.2f%%)", budget.getCategory(), budget.getPercentage()));
+			}
 		}
 		
 		return labels.stream().toArray(String[]::new);
 	}
 	
-	private Double[] getDataPoints(List<BudgetPercentages> bp){
+	private Double[] getDataPoints(List<Categories> bp){
 		List<Double> dataPoints = new ArrayList<Double>();
 		
-		for(BudgetPercentages budget : bp) {
-			dataPoints.add(budget.getPercent());
+		for(Categories budget : bp) {
+			if (budget.getPercentage() > 0) {
+				dataPoints.add(budget.getPercentage());
+			}
 		}
 		
 		return dataPoints.stream().toArray(Double[]::new);

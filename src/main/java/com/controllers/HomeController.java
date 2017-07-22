@@ -1,5 +1,7 @@
 package com.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +38,14 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/public/createhousehold")
-	public String createHousehold(@ModelAttribute("household") Household household, BindingResult result) {
-		
+	public String createHousehold(@Valid @ModelAttribute("household") Household household, BindingResult result) {
+		if (result.hasErrors()) {
+			return "signup";
+		}
+		if (householdService.exists(household.getUsername()) == true) {
+			result.rejectValue("username", "Duplicate.household.username");
+			return "signup";
+		}
 		householdService.create(household);
 		
 		return "redirect:/public/home";

@@ -22,7 +22,6 @@
 		<put-attribute name="title" value="Budget Hound" />
 		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp" />
 		<put-attribute name="heading_title" value="" />
-		<put-attribute name="footer" value="/WEB-INF/tiles/static/homefooter.jsp" />
 	</definition>
 
 	<definition name="error" extends="layout.basic">
@@ -74,6 +73,12 @@
 		<put-attribute name="title" value="Categories" />
 		<put-attribute name="heading_title" value="Categories" />
 		<put-attribute name="content" value="/WEB-INF/tiles/listcategories.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/static/pageinator.jsp" />
+	</definition>
+	<definition name="budgetbreakdown" extends="layout.basic">
+		<put-attribute name="title" value="Budget Breakdown" />
+		<put-attribute name="heading_title" value="Budget Breakdown" />
+		<put-attribute name="content" value="/WEB-INF/tiles/piechart.jsp" />
 	</definition>
 
 </tiles-definitions>

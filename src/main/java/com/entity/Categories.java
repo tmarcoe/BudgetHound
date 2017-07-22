@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Categories implements Serializable {
@@ -20,6 +21,7 @@ public class Categories implements Serializable {
 	private double amount;
 	private int level;
 	private boolean protect;
+	private double percentage;
 
 	
 	public Categories() {
@@ -87,6 +89,15 @@ public class Categories implements Serializable {
 
 	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+	
+	@Transient
+	public double getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(double percentage) {
+		this.percentage = percentage;
 	}
 	
 }

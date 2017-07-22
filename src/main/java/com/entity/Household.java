@@ -12,16 +12,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class Household implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private int household_id;
+	@NotBlank
 	private String name;
 	private int num_adults;
 	private int num_children;
+	@NotBlank
 	private String password;
+	@NotBlank
+	@Email
 	private String username;
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "household_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

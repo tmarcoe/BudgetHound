@@ -53,7 +53,10 @@ public class HouseholdService implements IHousehold {
 		return householdDao.retrieve(username);
 	}
 
-
+	public boolean exists(String username) {
+		return householdDao.exists(username);
+	}
+	
 	@Override
 	public void update(Household household) {
 		householdDao.update(household);	

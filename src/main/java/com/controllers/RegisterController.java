@@ -3,13 +3,17 @@ package com.controllers;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,7 +32,7 @@ import com.service.RegisterService;
 @RequestMapping("/user")
 public class RegisterController {
 
-	private final String pageLink = "/user/registerpaging";
+	private final String pageLink = "/user/%s/registerpaging";
 
 	@Autowired
 	private HouseholdService householdService;
@@ -65,7 +69,43 @@ public class RegisterController {
 	}
 
 	@RequestMapping("/{parent}/savetrans")
-	public String saveTransaction(@PathVariable("parent") String parent, @ModelAttribute("register") Register register, Principal principal) {
+	public String saveTransaction(@PathVariable("parent") String parent,@Valid @ModelAttribute("register") Register register, 
+			BindingResult result, Model model, Principal principal) {
+		
+		if (result.hasErrors()) {
+		
+			register.setTrans_date(new Date());
+			Household household = householdService.retrieve(principal.getName());
+			
+			model.addAttribute("parent", parent);
+			model.addAttribute("catList", categoriesService.retrieveSubCategories(household.getHousehold_id(), parent));
+			model.addAttribute("register", register);
+
+			return "createtrans";
+		}
+		
+		if ((register.getDeposit() == 0 && register.getWithdrawal() == 0) 
+				|| (register.getDeposit() > 0 && register.getWithdrawal() > 0)) {
+			result.rejectValue("withdrawal", "TransInv.register.withdrawal");
+			
+			Household household = householdService.retrieve(principal.getName());
+			model.addAttribute("parent", parent);
+			model.addAttribute("catList", categoriesService.retrieveSubCategories(household.getHousehold_id(), parent));
+			model.addAttribute("register", register);
+
+			return "createtrans";
+		}
+		
+		if ("".compareTo(register.getCategory()) == 0 && register.getDeposit() == 0 ) {
+			result.rejectValue("category","EnterCat.register.category");
+			Household household = householdService.retrieve(principal.getName());
+			model.addAttribute("parent", parent);
+			model.addAttribute("catList", categoriesService.retrieveSubCategories(household.getHousehold_id(), parent));
+			model.addAttribute("register", register);
+
+			return "createtrans";			
+		}
+		
 		Household household = householdService.retrieve(principal.getName());
 		register.setHousehold_id(household.getHousehold_id());
 		double ending_balance = registerService.getEndingBalance(household.getHousehold_id(), parent);
@@ -87,10 +127,11 @@ public class RegisterController {
 		
 		
 		registerList = registerService.retrieveList(household.getHousehold_id(), null, null, parent);
-
+		registerList.setPage(0);
+		registerList.setPageSize(15);
 		model.addAttribute("parent", parent);
 		model.addAttribute("objectList", registerList);
-		model.addAttribute("pagelink", pageLink);
+		model.addAttribute("pagelink", String.format(pageLink, parent));
 
 		return "listtrans";
 	}
@@ -103,12 +144,12 @@ public class RegisterController {
 		
 		model.addAttribute("parent", parent);
 		model.addAttribute("register", register);
-		model.addAttribute("catList", categoriesService.retrieveSubCategories(household.getHousehold_id(), "root"));
+		model.addAttribute("catList", categoriesService.retrieveSubCategories(household.getHousehold_id(), parent));
 		
 		return "edittrans";
 	}
 	
-	@RequestMapping("{parent}/updatetrans")
+	@RequestMapping("/{parent}/updatetrans")
 	public String updaateTransaction(@PathVariable("parent") String parent, @ModelAttribute("register") Register register) {
 		registerService.update(register);
 		registerService.totalTransaction(register.getHousehold_id(), parent);
@@ -136,9 +177,28 @@ public class RegisterController {
 		
 		return String.format("redirect:/user/%s/listtrans", parent);
 	}
+	
+	@RequestMapping("/{parent}/budgetbreakdown")
+	public String budgetBreakdown(@PathVariable("parent") String parent, Model model) {
+		
+		
+		model.addAttribute("parent", parent);
+		
+		return "budgetbreakdown";
+	}
+	
+	@RequestMapping("/{parent}/archive")
+	public String archiveBudget(@PathVariable("parent") String parent, Principal principal) {
+		Household household = householdService.retrieve(principal.getName());
+		
+		registerService.archiveBudget(household.getHousehold_id(), getPreviousMonth());
+		registerService.totalTransaction(household.getHousehold_id(), parent);
+		
+		return "redirect:/user/root/listtrans";
+	}
 
-	@RequestMapping(value = "/registerpaging", method = RequestMethod.GET)
-	public String handleRegisterPaging(@ModelAttribute("page") String page, Model model) throws Exception {
+	@RequestMapping(value = "/{parent}/registerpaging", method = RequestMethod.GET)
+	public String handleRegisterPaging(@PathVariable("parent") String parent, @ModelAttribute("page") String page, Model model) throws Exception {
 		int pgNum;
 
 		pgNum = isInteger(page);
@@ -150,8 +210,9 @@ public class RegisterController {
 		} else if (pgNum != -1) {
 			registerList.setPage(pgNum);
 		}
+		model.addAttribute("parent", parent);
 		model.addAttribute("objectList", registerList);
-		model.addAttribute("pagelink", pageLink);
+		model.addAttribute("pagelink", String.format(pageLink, parent));
 
 		return "listtrans";
 	}
@@ -173,6 +234,13 @@ public class RegisterController {
 		}
 		// only got here if we didn't return false
 		return retInt;
+	}
+	
+	private int getPreviousMonth() {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -1);
+		
+		return (cal.get(Calendar.MONTH) + 1);
 	}
 
 }

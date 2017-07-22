@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib>
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>2.0</jsp-version>
+	<tag>
+		<name>hasSubCategories</name>
+		<tag-class>com.taglibs.HasSubCategories</tag-class>
+		<body-content>scriptless</body-content>		
+		<attribute>
+			<name>category</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>household_id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>Integer</type>
+		</attribute>
+	</tag>
+</taglib>
