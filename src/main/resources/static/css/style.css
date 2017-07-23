@@ -879,7 +879,7 @@ div.modal {
 }
 .center {
 	margin: auto;
-    width: 50%;
+    width: 40%;
     padding: 10px;
 }
 .divshadow {
@@ -1049,7 +1049,7 @@ table.leftJustify th{
     -moz-transition: -moz-box-shadow .1s ease-in-out;
     -o-transition: -o-box-shadow .1s ease-in-out;
     transition: box-shadow .1s ease-in-out;
-    font-size: 50px;
+    font-size: 40px;
     color: #fff;
 }
 
