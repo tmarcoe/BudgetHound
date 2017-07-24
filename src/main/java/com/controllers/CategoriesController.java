@@ -14,6 +14,7 @@ import com.entity.Categories;
 import com.entity.Household;
 import com.service.CategoriesService;
 import com.service.HouseholdService;
+import com.service.RegisterService;
 
 @Controller
 @RequestMapping("/user")
@@ -25,6 +26,9 @@ public class CategoriesController {
 	
 	@Autowired
 	private HouseholdService householdService;
+	
+	@Autowired
+	private RegisterService registerService;
 	
 	private PagedListHolder<Categories> categoriesList;
 	
@@ -66,8 +70,8 @@ public class CategoriesController {
 		return String.format("redirect:/user/%s/listcategories", parent);
 	}
 	
-	@RequestMapping("/{parent}/uponelevel")
-	public String upOneLevel(@PathVariable("parent") String parent, Model model, Principal principal) {
+	@RequestMapping("/{parent}/uponecat")
+	public String upOneCategories(@PathVariable("parent") String parent, Model model, Principal principal) {
 		Household household = householdService.retrieve(principal.getName());
 		
 		Categories par = categoriesService.retrieveCategoryByName(household.getHousehold_id(), parent);
@@ -82,8 +86,11 @@ public class CategoriesController {
 	}
 	
 	@RequestMapping("/{parent}/deletecategory")
-	public String deleteCategory(@PathVariable("parent") String parent, @ModelAttribute("id") int id) {
+	public String deleteCategory(@PathVariable("parent") String parent, @ModelAttribute("id") int id, Principal principal) {
+		Household household = householdService.retrieve(principal.getName());
+			
 		Categories cat = categoriesService.retrieve(id);
+		registerService.removeTransactionsByCategory(household.getHousehold_id(), cat.getCategory());
 		categoriesService.delete(cat);
 		
 		return String.format("redirect:/user/%s/listcategories", parent);

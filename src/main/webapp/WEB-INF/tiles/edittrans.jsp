@@ -35,6 +35,7 @@
 		</tr>
 		<tr>
 			<td><sf:button type="submit">Save</sf:button></td>
+			<td><button type="button" onclick="window.history.back();">Cancel</button></td>
 		</tr>
 	</table>
 </sf:form>

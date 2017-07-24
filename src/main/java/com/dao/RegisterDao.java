@@ -242,6 +242,15 @@ public class RegisterDao implements IRegister {
 		session.createQuery(hql).setInteger("household_id", household_id).setInteger("month", month).executeUpdate();
 	}
 	
+	public void removeTransactionsByCategory(int household_id, String category) {
+		Session session = session();
+		String hql = "DELETE FROM Register WHERE household_id = :household_id AND category = :category";
+		Transaction tx = session.beginTransaction();
+		session.createQuery(hql).setInteger("household_id", household_id).setString("category", category).executeUpdate();
+		tx.commit();
+		session.disconnect();
+	}
+	
 	@Override
 	public void delete(Register register) {
 		Session session = session();

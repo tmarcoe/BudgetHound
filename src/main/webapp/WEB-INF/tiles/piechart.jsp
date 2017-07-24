@@ -4,7 +4,7 @@
 </div>
 <table class="buttonTable">
 	<tr>
-		<td><button type="button" onclick="followLink('/user/${parent}/listcategories')">OK</button></td>
+		<td><button type="button" onclick="followLink('/user/${parent}/listtrans')">OK</button></td>
 		<td><button type="button" onclick="renderCanvas()">View/Save Image</button></td>
 	</tr>
 </table>

@@ -58,6 +58,9 @@ public class RegisterService implements IRegister {
 		
 		return catList;
 	}
+	public void removeTransactionsByCategory(int household_id, String category) {
+		registerDao.removeTransactionsByCategory(household_id, category);
+	}
 
 	@Override
 	public void update(Register register) {

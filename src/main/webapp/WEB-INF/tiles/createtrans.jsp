@@ -44,7 +44,11 @@
 				<sf:errors path="category" />
 			</div></td>
 		</tr>
-		<tr><td><sf:button type="submit">Save</sf:button></td></tr>
+		<tr>
+			<td><sf:button type="submit">Save</sf:button></td>
+			<td><sf:button type="button" onclick="window.history.back()">Cancel</sf:button></td>
+		</tr>
+		
 	</table>
 
 </sf:form>

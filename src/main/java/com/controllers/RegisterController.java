@@ -110,6 +110,7 @@ public class RegisterController {
 		register.setHousehold_id(household.getHousehold_id());
 		double ending_balance = registerService.getEndingBalance(household.getHousehold_id(), parent);
 		register.setRunning_balance((ending_balance + register.getDeposit()) - register.getWithdrawal());
+		
 		registerService.create(register);
 		
 		if (register.getCategory().length() > 0) {
@@ -147,6 +148,14 @@ public class RegisterController {
 		model.addAttribute("catList", categoriesService.retrieveSubCategories(household.getHousehold_id(), parent));
 		
 		return "edittrans";
+	}
+	@RequestMapping("/{parent}/uponetrans")
+	public String upOneTransactions(@PathVariable("parent") String parent, Model model, Principal principal) throws ParseException {
+		Household household = householdService.retrieve(principal.getName());
+		
+		Categories par = categoriesService.retrieveCategoryByName(household.getHousehold_id(), parent);
+
+		return String.format("redirect:/user/%s/listtrans", par.getParent());
 	}
 	
 	@RequestMapping("/{parent}/updatetrans")
