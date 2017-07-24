@@ -28,7 +28,7 @@ Money is going, press the button labeled 'Breakdown'. It's just that simple.</h5
 <p /><p />
 <h3><b>Categories</b></h3>
 <h5>When you click on the The 'Categories' button, you enter the categories screen is where you can create your own categories and sub-categories. 
-We've created 10 budget categories for you. You are welcome to create your own, if you wish. However, no 2 categories can have the same name. 
-To enter a category, press the 'New Category' button, at the bottom of the table and type the category name. To enter a sub-category, open the category 
-that you wish to make a parent, by pressing the 'Open' button, next to the category. Then click the 'New Category' button. You can delete any user defined 
-categories but you cannot delete any of the predefined categories.</h5>
+You can also see the total amount that is spent on each category. We've created 10 budget categories for you. You are welcome to create your own, 
+if you wish. However, no 2 categories can have the same name. To enter a category, press the 'New Category' button, at the bottom of the table and 
+type the category name. To enter a sub-category, open the category that you wish to make a parent, by pressing the 'Open' button, next to the category. 
+Then click the 'New Category' button. You can delete any user defined categories but you cannot delete any of the predefined categories.</h5>
