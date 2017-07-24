@@ -1,11 +1,11 @@
 package com.controllers;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.entity.Categories;
 import com.entity.Household;
 import com.entity.Register;
+import com.helper.FileUpload;
 import com.service.CategoriesService;
 import com.service.HouseholdService;
 import com.service.RegisterService;
@@ -31,7 +31,10 @@ import com.service.RegisterService;
 @Controller
 @RequestMapping("/user")
 public class RegisterController {
-
+	/*
+	private final String[] columnNames = {"entry_id", "household_id", "trans_date", "recipient", 
+										  "description", "withdrawal", "deposit", "category", "running_balance"};
+*/
 	private final String pageLink = "/user/%s/registerpaging";
 
 	@Autowired
@@ -126,10 +129,14 @@ public class RegisterController {
 	public String listTransaction(@PathVariable("parent") String parent, Model model, Principal principal) throws ParseException {
 		Household household = householdService.retrieve(principal.getName());
 		
+		registerService.totalTransaction(household.getHousehold_id(), parent);
+		
+		boolean hasPrev = registerService.hasTransactions(household.getHousehold_id(), getPreviousMonth());
 		
 		registerList = registerService.retrieveList(household.getHousehold_id(), null, null, parent);
 		registerList.setPage(0);
 		registerList.setPageSize(15);
+		model.addAttribute("hasPrev", hasPrev);
 		model.addAttribute("parent", parent);
 		model.addAttribute("objectList", registerList);
 		model.addAttribute("pagelink", String.format(pageLink, parent));
@@ -195,11 +202,33 @@ public class RegisterController {
 		
 		return "budgetbreakdown";
 	}
+	@RequestMapping("/{parent}/download")
+	public String fileDownLoad(@PathVariable("parent") String parent, Model model, Principal principal) {
+		model.addAttribute("fileUpload", new FileUpload());
+		
+		return "download";
+	}
 	
 	@RequestMapping("/{parent}/archive")
-	public String archiveBudget(@PathVariable("parent") String parent, Principal principal) {
+	public String archiveBudget(@PathVariable("parent") String parent, @ModelAttribute("fileUpload") FileUpload path, Principal principal) throws IOException {
 		Household household = householdService.retrieve(principal.getName());
+		/*SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmm");
 		
+		if (path.getFile().endsWith("/") == false) {
+			path.setFile(path.getFile() + "/");
+		}
+		
+		String fileName = path.getFile() + sdf.format(new Date());
+
+		Writer hdr = new FileWriter(fileName);
+		CsvBeanWriter csvWriter = new CsvBeanWriter(hdr, CsvPreference.STANDARD_PREFERENCE);
+
+		List<Register> regList = registerService.retrieveRawList(household.getHousehold_id());
+		for (Register reg : regList) {
+			csvWriter.write(reg, columnNames);
+		}
+		csvWriter.close();
+		*/
 		registerService.archiveBudget(household.getHousehold_id(), getPreviousMonth());
 		registerService.totalTransaction(household.getHousehold_id(), parent);
 		
@@ -219,6 +248,7 @@ public class RegisterController {
 		} else if (pgNum != -1) {
 			registerList.setPage(pgNum);
 		}
+		model.addAttribute("hasPrev", false);
 		model.addAttribute("parent", parent);
 		model.addAttribute("objectList", registerList);
 		model.addAttribute("pagelink", String.format(pageLink, parent));

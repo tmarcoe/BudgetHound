@@ -13,8 +13,11 @@
 <title><tiles:insertAttribute name="title"></tiles:insertAttribute></title>
 <link rel="icon" href="<c:url value='/images/budgethoundlogo.png' />">
 <link href="/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/css/jquery-ui.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript" src="/script/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/script/jquery-ui.js"></script>
+
 <script type="text/javascript" src="/script/Chart.js"></script>
 <sec:getPrincipal />
 <tiles:insertAttribute name="includes"></tiles:insertAttribute>

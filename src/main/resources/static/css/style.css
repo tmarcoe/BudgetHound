@@ -424,10 +424,6 @@ table.inventoryDetails td {
 .rjthird td:nth-child(3) {
 	text-align: right;
 }
-
-.rjthird td:nth-child(3) {
-	text-align: right;
-}
 .rjfourth td:nth-child(4) {
 	text-align: right;
 }
@@ -435,6 +431,12 @@ table.inventoryDetails td {
 	text-align: right;
 }
 .rjsixth td:nth-child(6) {
+	text-align: right;
+}
+.rjseventh td:nth-child(7) {
+	text-align: right;
+}
+.rjeighth td:nth-child(8) {
 	text-align: right;
 }
 .addaccount {
@@ -820,7 +822,7 @@ div.modal {
     margin: 15% auto; /* 15% from the top and centered */
 	box-shadow: 0px 8px 16px 0px var(--light-shadow);
     padding: 20px;
-    border: 1px solid #888;
+    border: 3px ridge #888;
 
 }
 .small-modal {

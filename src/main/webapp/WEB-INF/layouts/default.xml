@@ -80,5 +80,15 @@
 		<put-attribute name="heading_title" value="Budget Breakdown" />
 		<put-attribute name="content" value="/WEB-INF/tiles/piechart.jsp" />
 	</definition>
+	<definition name="help" extends="layout.basic">
+		<put-attribute name="title" value="Instructions" />
+		<put-attribute name="heading_title" value="Instructions" />
+		<put-attribute name="content" value="/WEB-INF/tiles/help.jsp" />
+	</definition>
+	<definition name="download" extends="layout.basic">
+		<put-attribute name="title" value="Output File Location" />
+		<put-attribute name="heading_title" value="Output File Location" />
+		<put-attribute name="content" value="/WEB-INF/tiles/uploadfile.jsp" />
+	</definition>
 
 </tiles-definitions>

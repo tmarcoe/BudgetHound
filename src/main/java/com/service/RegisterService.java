@@ -43,6 +43,9 @@ public class RegisterService implements IRegister {
 
 		return new PagedListHolder<Register>(rl);
 	}
+	public List <Register> retrieveRawList(int household_id) {
+		return registerDao.retrieveRawList(household_id);
+	}
 	public List<Categories> budgetBreakdown(int household_id, String parent) {
 		double total = registerDao.getExpenseByParent(household_id, parent);
 		List<Categories> catList = categoriesService.retrieveByParent(household_id, parent);
@@ -87,5 +90,8 @@ public class RegisterService implements IRegister {
 	}
 	public void archiveBudget(int household_id, int month) {
 		registerDao.archivePreviousMonth(household_id, month);
+	}
+	public boolean hasTransactions(int household_id, int month) {
+		return registerDao.hasTransactions(household_id, month);
 	}
 }

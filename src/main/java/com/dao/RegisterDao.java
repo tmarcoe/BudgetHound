@@ -184,7 +184,7 @@ public class RegisterDao implements IRegister {
 		String hql = "SELECT SUM(withdrawal) FROM register r, categories c WHERE r.household_id = " +
 					 ":household_id AND c.category = r.category AND c.parent = :parent";
 		double total = (double) session.createSQLQuery(hql).setInteger("household_id", household_id).setString("parent", parent).uniqueResult();
-		
+		session.disconnect();
 		return total;
 	}
 	
@@ -219,7 +219,9 @@ public class RegisterDao implements IRegister {
 	
 	private Register getLastRecord(Session session, int household_id, int month) {
 		String hql = "FROM Register WHERE household_id = :household_id AND MONTH(trans_date) = :month ORDER BY entry_id DESC";
-		return (Register) session.createQuery(hql).setInteger("household_id", household_id).setInteger("month", month).setMaxResults(1).uniqueResult();
+		Register reg = (Register) session.createQuery(hql).setInteger("household_id", household_id).setInteger("month", month).setMaxResults(1).uniqueResult();
+		
+		return reg;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -233,7 +235,7 @@ public class RegisterDao implements IRegister {
 		for (Object[] reg : obj) {
 			total += ((Register) reg[0]).getDeposit() - ((Register) reg[0]).getWithdrawal();
 		}
-		
+		session.disconnect();
 		return total;
 	}
 		
@@ -241,7 +243,14 @@ public class RegisterDao implements IRegister {
 		String hql = "DELETE FROM Register WHERE household_id = :household_id AND MONTH(trans_date) = :month";
 		session.createQuery(hql).setInteger("household_id", household_id).setInteger("month", month).executeUpdate();
 	}
-	
+	public boolean hasTransactions(int household_id, int month) {
+		Session session = session();
+		String hql = "SELECT COUNT(*) FROM Register WHERE household_id = :household_id AND MONTH(trans_date) = :month";
+		
+		Long count = (Long) session.createQuery(hql).setInteger("household_id", household_id).setInteger("month", month).uniqueResult();
+		session.disconnect();
+		return (count > 0);
+	}
 	public void removeTransactionsByCategory(int household_id, String category) {
 		Session session = session();
 		String hql = "DELETE FROM Register WHERE household_id = :household_id AND category = :category";
@@ -259,6 +268,15 @@ public class RegisterDao implements IRegister {
 		session.createQuery(hql).setInteger("entry_id", register.getEntry_id()).executeUpdate();
 		tx.commit();
 		session.disconnect();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Register> retrieveRawList(int household_id) {
+		Session session = session();
+		List<Register> regList = session.createCriteria(Register.class).add(Restrictions.eq("household_id", household_id)).list();
+		session.disconnect();
+		
+		return regList;
 	}
 
 }

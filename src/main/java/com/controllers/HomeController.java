@@ -56,4 +56,9 @@ public class HomeController {
 		
 		return "login";
 	}
+	
+	@RequestMapping("/public/help")
+	public String showHelp() {
+		return "help";
+	}
 }
