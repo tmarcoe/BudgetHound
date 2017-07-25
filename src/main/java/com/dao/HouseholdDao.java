@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -50,6 +52,16 @@ public class HouseholdDao implements IHousehold {
 		return household;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Household> retrieveList() {
+		Session session = session();
+		
+		List<Household> houseList = session.createCriteria(Household.class).list();
+		session.disconnect();
+		
+		return houseList;
+	}
+	
 	public boolean exists(String username) {
 		Session session = session();
 		String hql = "SELECT COUNT(*) FROM Household WHERE username = :username";
@@ -73,6 +85,22 @@ public class HouseholdDao implements IHousehold {
 		Session session = session();
 		Transaction tx = session.beginTransaction();
 		session.delete(household);
+		tx.commit();
+		session.disconnect();
+	}
+	
+	public void delete(int household_id) {
+		Session session = session();
+		String hql = "DELETE FROM Household where household_id = :household_id";
+		Transaction tx = session.beginTransaction();
+		session.createQuery(hql).setInteger("household_id", household_id).executeUpdate();
+		tx.commit();
+		session.disconnect();
+	}
+	public void merge(Household household) {
+		Session session = session();
+		Transaction tx = session.beginTransaction();
+		session.merge(household);
 		tx.commit();
 		session.disconnect();
 	}

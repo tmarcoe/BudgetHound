@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -57,6 +59,23 @@ public class RoleDao implements IRole {
 		session.delete(role);
 		tx.commit();
 		session.disconnect();
+	}
+
+	public Role retrieve(String name) {
+		Session session = session();
+		Role role = (Role) session.createCriteria(Role.class).add(Restrictions.eq("role", name)).uniqueResult();
+		session.disconnect();
+		
+		return role;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Role> retrieveList() {
+		Session session = session();
+		List<Role> roleList = session.createCriteria(Role.class).list();
+		session.disconnect();
+		
+		return roleList;
 	}
 
 }

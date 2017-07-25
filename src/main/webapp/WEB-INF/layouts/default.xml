@@ -90,5 +90,15 @@
 		<put-attribute name="heading_title" value="Output File Location" />
 		<put-attribute name="content" value="/WEB-INF/tiles/uploadfile.jsp" />
 	</definition>
-
+	<definition name="listusers" extends="layout.basic">
+		<put-attribute name="title" value="Users" />
+		<put-attribute name="heading_title" value="Users" />
+		<put-attribute name="content" value="/WEB-INF/tiles/listusers.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/static/pageinator.jsp" />
+	</definition>
+	<definition name="edituser" extends="layout.basic">
+		<put-attribute name="title" value="Users" />
+		<put-attribute name="heading_title" value="Users" />
+		<put-attribute name="content" value="/WEB-INF/tiles/edituser.jsp" />
+	</definition>
 </tiles-definitions>

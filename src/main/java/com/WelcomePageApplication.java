@@ -30,7 +30,7 @@ public class WelcomePageApplication implements CommandLineRunner  {
     }
 	
 	public static void launchBrowser() throws IOException {
-		String url = "http://localhost:8080";
+		String url = "http://localhost:9000";
 		String os = System.getProperty("os.name").toLowerCase();
 		Runtime rt = Runtime.getRuntime();
 		

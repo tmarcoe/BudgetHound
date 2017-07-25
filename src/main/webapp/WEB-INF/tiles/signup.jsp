@@ -30,15 +30,10 @@
 				</div></td>
 		</tr>
 		<tr>
-			<td colspan="4"><hr>
-			<td>
-		</tr>
-		<tr>
 			<th>Community</th>
 			<th>City</th>
 			<th>Region</th>
 			<th>Country</th>
-			<th>Starting Balance</th>
 		</tr>
 		<tr>
 			<td><sf:input path="community" /></td>

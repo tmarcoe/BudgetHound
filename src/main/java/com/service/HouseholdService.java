@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +53,10 @@ public class HouseholdService implements IHousehold {
 		
 		return householdDao.retrieve(username);
 	}
+	
+	public PagedListHolder<Household> retrieveList() {
+		return new PagedListHolder<Household>(householdDao.retrieveList());
+	}
 
 	public boolean exists(String username) {
 		return householdDao.exists(username);
@@ -65,6 +70,13 @@ public class HouseholdService implements IHousehold {
 	@Override
 	public void delete(Household household) {
 		householdDao.delete(household);	
+	}
+	public void delete(int household_id) {
+		householdDao.delete(household_id);
+	}
+	
+	public void merge(Household household) {
+		householdDao.merge(household);
 	}
 
 }

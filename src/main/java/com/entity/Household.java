@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -39,6 +40,8 @@ public class Household implements Serializable {
 	private String region;
 	private double start_balance;
 	private boolean enabled;
+	@Transient
+	private String roleString;
 	
 	public int getHousehold_id() {
 		return household_id;
@@ -117,5 +120,12 @@ public class Household implements Serializable {
 	}
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
-	}	
+	}
+	public String getRoleString() {
+		return roleString;
+	}
+	public void setRoleString(String roleString) {
+		this.roleString = roleString;
+	}
+	
 }
