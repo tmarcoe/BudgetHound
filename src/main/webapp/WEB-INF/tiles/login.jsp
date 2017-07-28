@@ -44,7 +44,7 @@
 					<td><button type="button" onclick="followLink('/public/signup')" style="width: 100%;">Sign Up</button></td>
 				</tr>
 				<tr>
-					<td class="centerHeading"><a href="#" onclick="pwRecovery()">Forgot My Password</a></td>
+					<!--<td class="centerHeading"><a href="#" onclick="pwRecovery()">Forgot My Password</a></td>-->
 				</tr>
 			</table>
 		</form>

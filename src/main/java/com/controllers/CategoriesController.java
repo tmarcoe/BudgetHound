@@ -44,6 +44,7 @@ public class CategoriesController {
 		
 		categoriesList.setPage(0);
 		categoriesList.setPageSize(15);
+		model.addAttribute("error", "");
 		model.addAttribute("parent", parent);
 		model.addAttribute("objectList", categoriesList);
 		model.addAttribute("pagelink", String.format(pageLink, parent));
@@ -86,12 +87,26 @@ public class CategoriesController {
 	}
 	
 	@RequestMapping("/{parent}/deletecategory")
-	public String deleteCategory(@PathVariable("parent") String parent, @ModelAttribute("id") int id, Principal principal) {
+	public String deleteCategory(@PathVariable("parent") String parent, @ModelAttribute("id") int id, Model model,Principal principal) {
 		Household household = householdService.retrieve(principal.getName());
 			
 		Categories cat = categoriesService.retrieve(id);
-		registerService.removeTransactionsByCategory(household.getHousehold_id(), cat.getCategory());
-		categoriesService.delete(cat);
+		if (registerService.transactionsExistByCategory(household.getHousehold_id(), cat.getCategory())) {
+			
+			categoriesList = categoriesService.retrieveList(household.getHousehold_id(), parent);
+			
+			categoriesList.setPage(0);
+			categoriesList.setPageSize(15);
+			model.addAttribute("error", "You cannot delete a category while it has transactions");
+			model.addAttribute("parent", parent);
+			model.addAttribute("objectList", categoriesList);
+			model.addAttribute("pagelink", String.format(pageLink, parent));
+			
+			return "listcategories";
+		}else{
+			registerService.removeTransactionsByCategory(household.getHousehold_id(), cat.getCategory());
+			categoriesService.delete(cat);
+		}
 		
 		return String.format("redirect:/user/%s/listcategories", parent);
 	}

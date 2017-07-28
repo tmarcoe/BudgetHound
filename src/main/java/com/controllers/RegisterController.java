@@ -74,6 +74,7 @@ public class RegisterController {
 	@RequestMapping("/{parent}/savetrans")
 	public String saveTransaction(@PathVariable("parent") String parent,@Valid @ModelAttribute("register") Register register, 
 			BindingResult result, Model model, Principal principal) {
+		double ending_balance = 0;
 		
 		if (result.hasErrors()) {
 		
@@ -111,8 +112,13 @@ public class RegisterController {
 		
 		Household household = householdService.retrieve(principal.getName());
 		register.setHousehold_id(household.getHousehold_id());
-		double ending_balance = registerService.getEndingBalance(household.getHousehold_id(), parent);
+		if ("root".compareTo(parent) == 0) {
+			ending_balance = registerService.getEndingBalance(household.getHousehold_id(), parent);
+		}else{
+			ending_balance = registerService.getExpenseByCategory(household.getHousehold_id(), parent);
+		}
 		register.setRunning_balance((ending_balance + register.getDeposit()) - register.getWithdrawal());
+		
 		
 		registerService.create(register);
 		
@@ -186,6 +192,9 @@ public class RegisterController {
 		registerService.totalTransaction(reg.getHousehold_id(), parent);
 		
 		if (reg.getCategory().length() > 0) {
+			if (registerService.transactionsExistByCategory(reg.getHousehold_id(), reg.getCategory()) == false) {
+				registerService.deleteChildren(reg.getHousehold_id(), reg.getCategory());
+			}
 			Categories cat = categoriesService.retrieveCategoryByName(reg.getHousehold_id(),reg.getCategory());
 			cat.setAmount(registerService.getExpenseByCategory(reg.getHousehold_id(), reg.getCategory()));
 			categoriesService.update(cat);
@@ -212,23 +221,7 @@ public class RegisterController {
 	@RequestMapping("/{parent}/archive")
 	public String archiveBudget(@PathVariable("parent") String parent, @ModelAttribute("fileUpload") FileUpload path, Principal principal) throws IOException {
 		Household household = householdService.retrieve(principal.getName());
-		/*SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmm");
-		
-		if (path.getFile().endsWith("/") == false) {
-			path.setFile(path.getFile() + "/");
-		}
-		
-		String fileName = path.getFile() + sdf.format(new Date());
 
-		Writer hdr = new FileWriter(fileName);
-		CsvBeanWriter csvWriter = new CsvBeanWriter(hdr, CsvPreference.STANDARD_PREFERENCE);
-
-		List<Register> regList = registerService.retrieveRawList(household.getHousehold_id());
-		for (Register reg : regList) {
-			csvWriter.write(reg, columnNames);
-		}
-		csvWriter.close();
-		*/
 		registerService.archiveBudget(household.getHousehold_id(), getPreviousMonth());
 		registerService.totalTransaction(household.getHousehold_id(), parent);
 		

@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 <form id="listcat" action="/user/${parent}/createcategory" method="post">
+	
 	<h3>Parent: ${parent}</h3>
 	<div class="error">${error}</div>
 	<table class="tableview rjsecond tableshadow tableborder">
@@ -72,8 +73,9 @@
 		modal.style.display = "none"
 	}
 	function remove(name, parent, id) {
-		confirm("Do you really want to remove '" + name + "' from the list of categories.");
-		window.location.href="/user/" + parent + "/deletecategory?id=" + id;
+		if (confirm("Do you really want to remove '" + name + "' from the list of categories.") == true) {
+			window.location.href="/user/" + parent + "/deletecategory?id=" + id;
+		}
 	}
 	function newCategory(p) {
 		var cat = document.getElementById('cat').value;

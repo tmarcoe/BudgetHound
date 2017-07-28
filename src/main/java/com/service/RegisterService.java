@@ -74,6 +74,9 @@ public class RegisterService implements IRegister {
 	public void delete(Register register) {
 		registerDao.delete(register);
 	}
+	public boolean transactionsExistByCategory(int household_id, String category) {
+		return registerDao.transactionsExistByCategory(household_id, category);
+	}
 	
 	public void totalTransaction(int household_id, String parent) {
 		registerDao.totalTransactions(household_id, parent);
@@ -93,5 +96,9 @@ public class RegisterService implements IRegister {
 	}
 	public boolean hasTransactions(int household_id, int month) {
 		return registerDao.hasTransactions(household_id, month);
+	}
+
+	public void deleteChildren(int household_id, String parent) {
+		registerDao.deleteChildren(household_id, parent);
 	}
 }

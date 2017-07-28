@@ -24,8 +24,8 @@ import interfaces.IRegister;
 @Transactional
 @Repository
 public class RegisterDao implements IRegister {
-	private final String rowsByRoot = "FROM Register r, Categories c WHERE r.household_id = :household_id AND "
-			+ "((c.category = r.category AND c.parent = :parent) or deposit > 0) group by entry_id";
+	private final String rowsByRoot = "FROM Register r, Categories c WHERE r.household_id = :household_id AND ((c.household_id = r.household_id AND "
+			+ "c.category = r.category AND c.parent = :parent) or deposit > 0) group by entry_id";
 	
 	@Autowired
 	private CategoriesService categoriesService;
@@ -74,7 +74,7 @@ public class RegisterDao implements IRegister {
 			hql = "FROM Register r, Categories c WHERE r.household_id = :household_id AND ((r.trans_date BETWEEN :start AND :end "
 					+ "AND  c.category = r.category AND c.parent = :parent) OR deposit > 0) group by entry_id";
 		} else {
-			hql = "FROM Register r, Categories c WHERE r.household_id = :household_id AND (r.trans_date BETWEEN :start AND :end "
+			hql = "FROM Register r, Categories c WHERE r.household_id = :household_id AND (c.household_id = r.household_id AND r.trans_date BETWEEN :start AND :end "
 					+ "AND  c.category = r.category AND c.parent = :parent) group by entry_id";
 		}
 
@@ -104,7 +104,8 @@ public class RegisterDao implements IRegister {
 			hqlList = rowsByRoot;
 			total = 0;
 		} else {
-			hqlList = "FROM Register r, Categories c WHERE r.household_id = :household_id AND (c.category = r.category AND c.parent = :parent) ORDER BY entry_id";
+			hqlList = "FROM Register r, Categories c WHERE r.household_id = :household_id AND (c.household_id = r.household_id AND " +
+					  "c.category = r.category AND c.parent = :parent) ORDER BY entry_id";
 			Categories cat = categoriesService.retrieveCategoryByName(household_id, parent);
 			total = cat.getAmount();
 		}
@@ -124,12 +125,14 @@ public class RegisterDao implements IRegister {
 	public double getTotalWithdrawals(int household_id, String parent) {
 		Session session = session();
 		double withdrawal = 0;
-		String hql = "FROM Register r, Categories c WHERE r.household_id = :household_id AND (c.category = r.category AND c.parent = :parent)";
+		String hql = "FROM Register r, Categories c WHERE r.household_id = :household_id AND (c.household_id = r.household_id AND " +
+					 "c.category = r.category AND c.parent = :parent)";
 		List<Register> r = session.createQuery(hql).setInteger("household_id", household_id).setString("parent", parent)
 				.list();
 
 		if (r.size() > 0) {
-			String wHql = "SELECT SUM(withdrawal) FROM register r, categories c WHERE r.household_id = :household_id AND c.category = r.category AND c.parent = :parent";
+			String wHql = "SELECT SUM(withdrawal) FROM register r, categories c WHERE r.household_id = :household_id AND c.household_id = r.household_id " +
+						  "AND c.category = r.category AND c.parent = :parent";
 			withdrawal = (double) session.createSQLQuery(wHql).setInteger("household_id", household_id)
 					.setString("parent", parent).uniqueResult();
 		}
@@ -179,12 +182,20 @@ public class RegisterDao implements IRegister {
 		return ending_balance;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public double getExpenseByParent(int household_id, String parent) {
+		double total = 0;
+		
 		Session session = session();
-		String hql = "SELECT SUM(withdrawal) FROM register r, categories c WHERE r.household_id = " +
-					 ":household_id AND c.category = r.category AND c.parent = :parent";
-		double total = (double) session.createSQLQuery(hql).setInteger("household_id", household_id).setString("parent", parent).uniqueResult();
+		String hql = "FROM Register r, Categories c WHERE r.household_id = " +
+					 ":household_id AND (c.category = r.category AND c.parent = :parent) group by entry_id";
+		List<Object[]> obj = session.createQuery(hql).setInteger("household_id", household_id).setString("parent", parent).list();
 		session.disconnect();
+		
+		for (Object[] reg : obj) {
+			total += ((Register) reg[0]).getWithdrawal();
+		}
+		
 		return total;
 	}
 	
@@ -277,6 +288,28 @@ public class RegisterDao implements IRegister {
 		session.disconnect();
 		
 		return regList;
+	}
+
+	public boolean transactionsExistByCategory(int household_id, String category) {
+		Session session = session();
+		String hql = "SELECT COUNT(*) FROM Register WHERE household_id = :household_id AND category = :category";
+		
+		long count = (long) session.createQuery(hql).setInteger("household_id", household_id).setString("category", category).uniqueResult();
+		
+		return (count > 0);
+	}
+
+	public void deleteChildren(int household_id, String parent) {
+		Session session = session();
+		String hql = "DELETE FROM Register WHERE household_id = :household_id AND category = :category";
+		List<Categories> catList = categoriesService.retrieveRawList(household_id, parent);
+		Transaction tx = session.beginTransaction();
+		for (Categories cat : catList) {
+			session.createQuery(hql).setInteger("household_id", household_id).setString("category", cat.getCategory()).executeUpdate();
+		}
+		tx.commit();
+		session.disconnect();
+		
 	}
 
 }
