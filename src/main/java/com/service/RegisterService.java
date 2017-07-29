@@ -43,6 +43,11 @@ public class RegisterService implements IRegister {
 
 		return new PagedListHolder<Register>(rl);
 	}
+	public boolean hasSubCategories(int household_id, String parent) throws ParseException {
+		List<Object[]> r = registerDao.retieveList(household_id, null, null, parent);
+		
+		return (r.size() > 0);
+	}
 	public List <Register> retrieveRawList(int household_id) {
 		return registerDao.retrieveRawList(household_id);
 	}
@@ -77,7 +82,9 @@ public class RegisterService implements IRegister {
 	public boolean transactionsExistByCategory(int household_id, String category) {
 		return registerDao.transactionsExistByCategory(household_id, category);
 	}
-	
+	public long transactioncountByCategory(int household_id, String category) {
+		return registerDao.transactionCountByCategory(household_id, category);
+	}
 	public void totalTransaction(int household_id, String parent) {
 		registerDao.totalTransactions(household_id, parent);
 	}

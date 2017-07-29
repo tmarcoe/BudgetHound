@@ -299,6 +299,15 @@ public class RegisterDao implements IRegister {
 		return (count > 0);
 	}
 
+	public long transactionCountByCategory(int household_id, String category) {
+		Session session = session();
+		String hql = "SELECT COUNT(*) FROM Register WHERE household_id = :household_id AND category = :category";
+		
+		long count = (long) session.createQuery(hql).setInteger("household_id", household_id).setString("category", category).uniqueResult();
+		
+		return count;
+	}
+
 	public void deleteChildren(int household_id, String parent) {
 		Session session = session();
 		String hql = "DELETE FROM Register WHERE household_id = :household_id AND category = :category";

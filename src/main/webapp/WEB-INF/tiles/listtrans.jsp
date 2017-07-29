@@ -5,8 +5,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 <sql:setDataSource var="ds" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/budget" user="donzalma_admin" password="In_heaven3" />
+<h3>Parent: ${parent}</h3>
+<div class="error">${error}</div>
 <table class="tableview tableshadow tableborder rjsixth rjseventh rjeight">
-	<caption>Parent: ${parent}</caption>
+
 	<tr>
 		<th colspan="2">&nbsp;</th>
 		<th>Date</th>
@@ -56,9 +58,8 @@
 		</tr>
 	</tfoot>
 </table>
-<div id="confirmDialog" title="Archive Required">
-	<h5>It is strongly suggested that you archive
-	The previous month's transactions.</h5>
+<div id="confirmDialog" title="Archive Required" class="hiddenPopup">
+	<h5>It is strongly suggested that you archive The previous month's transactions.</h5>
 	<p>Do you wish to do that now?</p>
 </div>
 <script type="text/javascript">
@@ -66,23 +67,22 @@
 	var targetUrl = "/user/root/archive";
 	$(document).ready(function() {
 		if (tst == true) {
-		    $("#confirmDialog").dialog({
-		      autoOpen: true,
-		      modal: true,
-		      buttons: {
-		        "Yes" : function() {
-			            window.location.href = targetUrl;
-			          },
-			    "No" : function() {
-			            $(this).dialog("close");
-			          }
-			        }
-		    });
-		}else{
+			$("#confirmDialog").dialog({
+				autoOpen : true,
+				modal : true,
+				buttons : {
+					"Yes" : function() {
+						window.location.href = targetUrl;
+					},
+					"No" : function() {
+						$(this).dialog("close");
+					}
+				}
+			});
+		} else {
 			$("#confirmDialog").hide();
 		}
 	});
-	  
 
 	function remove(entry_id, parent) {
 		if (confirm("Are you sure you want to delete this transaction?") == true) {
@@ -90,5 +90,4 @@
 					+ entry_id
 		}
 	}
-	
 </script>
