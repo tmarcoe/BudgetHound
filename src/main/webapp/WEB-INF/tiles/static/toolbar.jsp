@@ -14,7 +14,7 @@
 			</sec:isAuthenticated>
 			<sec:hasRole role="ADMIN">
 				<li><a href="/admin/listusers">Users</a></li>
-				<li><a href="/admin/shutdown">Shutdown</a></li>
+				<li><a href="#" onclick="shutDown()">Shutdown</a></li>
 			</sec:hasRole>		
 			<li><a href="/public/help">Help</a></li>
 		</ul>
