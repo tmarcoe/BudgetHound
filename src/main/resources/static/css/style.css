@@ -439,6 +439,11 @@ table.inventoryDetails td {
 .rjeighth td:nth-child(8) {
 	text-align: right;
 }
+
+.cjfifth td:nth-child(5){
+	text-align: center;
+}
+
 .addaccount {
 	font-size: 14px;
 }

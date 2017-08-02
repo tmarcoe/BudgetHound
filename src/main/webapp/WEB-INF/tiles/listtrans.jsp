@@ -7,7 +7,7 @@
 <sql:setDataSource var="ds" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/budget" user="donzalma_admin" password="In_heaven3" />
 <h3>Parent: ${parent}</h3>
 <div class="error">${error}</div>
-<table class="tableview tableshadow tableborder rjsixth rjseventh rjeight">
+<table class="tableview tableshadow tableborder rjsixth rjseventh rjeighth">
 
 	<tr>
 		<th colspan="2">&nbsp;</th>

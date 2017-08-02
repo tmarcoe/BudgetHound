@@ -2,12 +2,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <form id="listcat" action="/user/${parent}/createcategory" method="post">
 	
 	<h3>Parent: ${parent}</h3>
 	<div class="error">${error}</div>
-	<table class="tableview rjsecond tableshadow tableborder">
+	<table class="tableview tableshadow tableborder rjfourth cjfifth">
 		<tr>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
@@ -27,7 +28,7 @@
 					</c:if>&nbsp;</td>
 				<td><button type="button" onclick="window.location.href='/user/${item.category}/listcategories'">Open</button></td>
 				<td>${item.category}</td>
-				<td>${item.amount}</td>
+				<td><fmt:formatNumber type="currency" value="${item.amount}" currencySymbol="" />
 				<td>${item.protect}</td>
 			</tr>
 		</c:forEach>
