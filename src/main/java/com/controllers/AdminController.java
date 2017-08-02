@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.entity.Household;
 import com.entity.Role;
+import com.service.CategoriesService;
 import com.service.HouseholdService;
+import com.service.RegisterService;
 import com.service.RoleService;
 
 @Controller
@@ -24,6 +26,12 @@ public class AdminController {
 	
 	@Autowired
 	private HouseholdService householdService;
+	
+	@Autowired
+	private RegisterService registerService;
+	
+	@Autowired
+	CategoriesService categoriesService;
 	
 	@Autowired
 	private RoleService roleService;
@@ -71,7 +79,8 @@ public class AdminController {
 	@RequestMapping("/deleteuser")
 	public String deleteUser(@ModelAttribute("household_id") int household_id) {
 		householdService.delete(household_id);
-		
+		registerService.deleteByHouseholdId(household_id);
+		categoriesService.deleteByHouseholdId(household_id);
 		
 		return "redirect:/admin/listusers";
 	}

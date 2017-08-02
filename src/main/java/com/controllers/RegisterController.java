@@ -32,7 +32,7 @@ import com.service.RegisterService;
 @RequestMapping("/user")
 public class RegisterController {
 	private final String pageLink = "/user/%s/registerpaging";
-
+	
 	@Autowired
 	private HouseholdService householdService;
 
@@ -241,8 +241,9 @@ public class RegisterController {
 	public String archiveBudget(@PathVariable("parent") String parent, @ModelAttribute("fileUpload") FileUpload path,
 			Principal principal) throws IOException {
 		Household household = householdService.retrieve(principal.getName());
-
+		
 		registerService.archiveBudget(household.getHousehold_id(), getPreviousMonth());
+		categoriesService.zeroCategories(household.getHousehold_id());
 		registerService.totalTransaction(household.getHousehold_id(), parent);
 
 		return "redirect:/user/root/listtrans";

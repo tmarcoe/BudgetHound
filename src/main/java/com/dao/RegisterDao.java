@@ -321,4 +321,24 @@ public class RegisterDao implements IRegister {
 		
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Register> getTransactionsByMonth(int household_id, int month) {
+		Session session = session();
+		String hql = "FROM Register WHERE household_id = :household_id AND MONTH(trans_date) = :month";
+		List<Register> regList = session.createQuery(hql).setInteger("household_id", household_id).setInteger("month", month).list();
+		
+		session.disconnect();
+		
+		return regList;
+	}
+
+	public void deleteByHouseholdId(int household_id) {
+		Session session = session();
+		String hql = "DELETE FROM Register WHERE household_id = :household_id";
+		Transaction tx = session.beginTransaction();
+		session.createQuery(hql).setInteger("household_id", household_id).executeUpdate();
+		tx.commit();
+		session.disconnect();
+	}
+
 }

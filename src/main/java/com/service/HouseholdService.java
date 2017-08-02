@@ -18,7 +18,7 @@ import interfaces.IHousehold;
 @Service
 public class HouseholdService implements IHousehold {
 	private final String[] newCategories = {"Emergency Fund", "Housing", "Savings", "Utilities",  "Health Care", 
-							  "Consumer Debt", "Food and Groceries", "Personal Care", "Entertainment", "Transportation"};
+							  "Consumer Debt", "Food and Groceries", "Personal Care", "Entertainment", "Transportation", "Business Expense", "Bank Fees"};
 	private final String root = "root";
 	@Autowired
 	private HouseholdDao householdDao;

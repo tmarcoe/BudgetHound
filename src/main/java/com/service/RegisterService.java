@@ -1,13 +1,21 @@
 package com.service;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Service;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 
 import com.dao.RegisterDao;
 import com.entity.Categories;
@@ -24,6 +32,9 @@ public class RegisterService implements IRegister {
 	@Autowired
 	private CategoriesService categoriesService;
 	
+	@Value("${app.files.archiveDir}")
+	private String archiveDir;
+
 	@Override
 	public void create(Register register) {
 		registerDao.create(register);
@@ -98,7 +109,21 @@ public class RegisterService implements IRegister {
 		
 		return registerDao.getExpenseByCategory(household_id, category);
 	}
-	public void archiveBudget(int household_id, int month) {
+	
+	public void archiveBudget(int household_id, int month) throws IOException {
+		String[] colNames = {"entry_id", "household_id", "trans_date", "recipient", "description", "withdrawal", "deposit", "category", "running_balance",};
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String filePath = archiveDir + sdf.format(cal.getTime()) + "-" + String.format("%08d", household_id) + ".csv";
+		Writer archive = new FileWriter(filePath);
+		CsvBeanWriter csvWriter = new CsvBeanWriter(archive, CsvPreference.STANDARD_PREFERENCE);
+		
+		List<Register> regList = registerDao.getTransactionsByMonth(household_id, month);
+		for(Register reg : regList) {
+			csvWriter.write(reg, colNames);
+		}
+		csvWriter.close();
+		
 		registerDao.archivePreviousMonth(household_id, month);
 	}
 	public boolean hasTransactions(int household_id, int month) {
@@ -107,5 +132,8 @@ public class RegisterService implements IRegister {
 
 	public void deleteChildren(int household_id, String parent) {
 		registerDao.deleteChildren(household_id, parent);
+	}
+	public void deleteByHouseholdId(int household_id) {
+		registerDao.deleteByHouseholdId(household_id);
 	}
 }

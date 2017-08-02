@@ -135,4 +135,21 @@ public class CategoriesDao implements ICategories {
 		return (count > 0);
 	}
 
+	public void deleteByhouseholdId(int household_id) {
+		Session session = session();
+		String hql = "DELETE FROM Categories WHERE household_id = :household_id";
+		Transaction tx = session.beginTransaction();
+		session.createQuery(hql).setInteger("household_id", household_id).executeUpdate();
+		tx.commit();
+		session.disconnect();
+	}
+	
+	public void zeroCategories(int household_id) {
+		Session session = session();
+		String hql = "UPDATE Categories SET amount = 0 WHERE household_id = :household_id";
+		Transaction tx = session.beginTransaction();
+		session.createQuery(hql).setInteger("household_id", household_id).executeUpdate();
+		tx.commit();
+		session.disconnect();
+	}
 }

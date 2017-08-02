@@ -61,4 +61,10 @@ public class CategoriesService implements ICategories {
 	public List<Categories> retrieveRawList(int household_id, String parent) {
 		return categoriesDao.retrieveList(household_id, parent);
 	}
+	public void deleteByHouseholdId(int household_id) {
+		categoriesDao.deleteByhouseholdId(household_id);
+	}
+	public void zeroCategories(int household_id) {
+		categoriesDao.zeroCategories(household_id);
+	}
 }
