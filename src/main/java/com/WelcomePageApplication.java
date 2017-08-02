@@ -19,6 +19,7 @@ public class WelcomePageApplication implements CommandLineRunner  {
 	public static void main(String[] args) throws IOException, URISyntaxException {
 
 		SpringApplication.run(WelcomePageApplication.class, args);
+		//TODO: Comment out laungBrower in live version 
 		WelcomePageApplication.launchBrowser();
 	}
 	
