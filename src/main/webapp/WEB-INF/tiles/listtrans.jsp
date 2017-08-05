@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-<sql:setDataSource var="ds" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/budget" user="donzalma_admin" password="In_heaven3" />
+<sql:setDataSource var="ds" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/donzalma_budget" user="donzalma_admin" password="In_heaven3" />
 <h3>Parent: ${parent}</h3>
 <div class="error">${error}</div>
 <table class="tableview tableshadow tableborder rjsixth rjseventh rjeighth">
@@ -32,7 +32,7 @@
 			<td><fmt:formatNumber type="currency" value="${item.running_balance}" currencySymbol="" /></td>
 			<td>${item.category}</td>
 			<sql:query var="child" dataSource="${ds}"
-				sql="SELECT * FROM Categories WHERE household_id = ${item.household_id} AND parent = '${item.category}'" />
+				sql="SELECT * FROM categories WHERE household_id = ${item.household_id} AND parent = '${item.category}'" />
 			<c:choose>
 				<c:when test="${child.rowCount > 0}">
 					<td><button type="button" onclick="window.location.href='/user/${item.category}/listtrans'">Subcategories</button></td>

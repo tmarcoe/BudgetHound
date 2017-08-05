@@ -109,7 +109,7 @@ public class RegisterDao implements IRegister {
 			Categories cat = categoriesService.retrieveCategoryByName(household_id, parent);
 			total = cat.getAmount();
 		}
-		String sqlUpd = "UPDATE Register SET running_balance = ((:total + deposit) - withdrawal) WHERE entry_id = :entry_id";
+		String sqlUpd = "UPDATE register SET running_balance = ((:total + deposit) - withdrawal) WHERE entry_id = :entry_id";
 		List<Object[]> obj = session.createQuery(hqlList).setInteger("household_id", household_id)
 				.setString("parent", parent).list();
 		
