@@ -4,7 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-<sql:setDataSource var="ds" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/donzalma_budget" user="donzalma_admin" password="In_heaven3" />
+<sql:setDataSource var="ds" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/donzalma_budget" user="donzalma_admin"
+	password="In_heaven3" />
 <h3>Parent: ${parent}</h3>
 <div class="error">${error}</div>
 <table class="tableview tableshadow tableborder rjsixth rjseventh rjeighth">
@@ -22,8 +23,9 @@
 	</tr>
 	<c:forEach var="item" items="${objectList.pageList}">
 		<tr>
-			<td><button type="button" onclick="window.location.href='/user/${parent}/edittrans?entry_id=${item.entry_id}'">Edit</button></td>
-			<td><button type="button" onclick="remove('${item.entry_id}','${parent}')">Delete</button></td>
+			<td><button class="north" type="button" onclick="window.location.href='/user/${parent}/edittrans?entry_id=${item.entry_id}'"
+					title="Edit the transaction">Edit</button></td>
+			<td><button class="north" type="button" onclick="remove('${item.entry_id}','${parent}')" title="Delete the transaction" >Delete</button></td>
 			<td><fmt:formatDate value="${item.trans_date}" /></td>
 			<td>${item.recipient}</td>
 			<td>${item.description}</td>
@@ -53,8 +55,10 @@
 					<td colspan="8">&nbsp;</td>
 				</c:otherwise>
 			</c:choose>
-			<td><button type="button" onclick="window.location.href='/user/${parent}/createtrans'">New Entry</button></td>
-			<td><button type="button" onclick="window.location.href='/user/${parent}/budgetbreakdown'">Breakdown</button></td>
+			<td><button class="north" type="button" onclick="window.location.href='/user/${parent}/createtrans'" title="Add more transactions">New
+					Entry</button></td>
+			<td><button class="east" type="button" onclick="window.location.href='/user/${parent}/budgetbreakdown'"
+					title="See a graph of spending percentages">Breakdown</button></td>
 		</tr>
 	</tfoot>
 </table>
@@ -62,6 +66,7 @@
 	<h5>It is strongly suggested that you archive The previous month's transactions.</h5>
 	<p>Do you wish to do that now?</p>
 </div>
+
 <script type="text/javascript">
 	var tst = ${hasPrev};
 	var targetUrl = "/user/root/archive";

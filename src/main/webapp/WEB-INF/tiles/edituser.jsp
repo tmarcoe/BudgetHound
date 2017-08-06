@@ -13,10 +13,10 @@
 			<th>E-Mail</th>
 		</tr>
 		<tr>
-			<td><sf:input path="name" /></td>
-			<td><sf:input path="num_adults" type="number" /></td>
-			<td><sf:input path="num_children" type="number" /></td>
-			<td><sf:input path="username" /></td>
+			<td><sf:input class="north" path="name" title="The name of the household" /></td>
+			<td><sf:input class="north" path="num_adults" type="number" title="Number of Adults" /></td>
+			<td><sf:input class="north" path="num_children" type="number" title="Number of Children" /></td>
+			<td><sf:input class="north" path="username" title="Valid email address" /></td>
 		</tr>
 		<tr>
 			<td><div class="error">
@@ -39,10 +39,10 @@
 			<th>Country</th>
 		</tr>
 		<tr>
-			<td><sf:input path="community" /></td>
-			<td><sf:input path="city" /></td>
-			<td><sf:input path="region" /></td>
-			<td><sf:input path="country" /></td>
+			<td><sf:input class="north" path="community" title="This is for future expansion (no need to fill it out now)"/></td>
+			<td><sf:input class="north" path="city" title="This is for future expansion (no need to fill it out now)"/></td>
+			<td><sf:input class="north" path="region" title="This is for future expansion (no need to fill it out now)"/></td>
+			<td><sf:input class="north" path="country" title="This is for future expansion (no need to fill it out now)"/></td>
 		</tr>
 		<tr>
 			<td><div class="error">
@@ -59,10 +59,10 @@
 				</div></td>
 		</tr>
 		<tr>
-			<td><sf:select path="roles" id="roles" multiselect="true">
+			<td><sf:select class="north" path="roles" id="roles" multiselect="true" title="Assign security roles" >
 					<sf:options items="${roles}" itemValue="id" itemLabel="role" />
 				</sf:select></td>
-			<td>Enabled:<sf:checkbox path="enabled"/></td>
+			<td>Enabled:<sf:checkbox class="north" path="enabled" title="User enabled?"/></td>
 		</tr>
 		<tr>
 			<td><sf:hidden path="roleString" id="roleString" /></td>

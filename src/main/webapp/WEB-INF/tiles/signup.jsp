@@ -10,10 +10,10 @@
 			<th>E-Mail</th>
 		</tr>
 		<tr>
-			<td><sf:input path="name" /></td>
-			<td><sf:input path="num_adults" type="number" /></td>
-			<td><sf:input path="num_children" type="number" /></td>
-			<td><sf:input path="username" /></td>
+			<td><sf:input class="north" path="name" title="The name of the household"/></td>
+			<td><sf:input class="north" path="num_adults" type="number" title="Number of Adults"/></td>
+			<td><sf:input class="north" path="num_children" type="number" title="Number of Children"/></td>
+			<td><sf:input class="north" path="username" title="Valid email address" /></td>
 		</tr>
 		<tr>
 			<td><div class="error">
@@ -36,10 +36,10 @@
 			<th>Country</th>
 		</tr>
 		<tr>
-			<td><sf:input path="community" /></td>
-			<td><sf:input path="city" /></td>
-			<td><sf:input path="region" /></td>
-			<td><sf:input path="country" /></td>
+			<td><sf:input class="north-east" path="community" title="This is for future expansion (no need to fill it out now)"/></td>
+			<td><sf:input class="north" path="city" title="This is for future expansion (no need to fill it out now)"/></td>
+			<td><sf:input class="north" path="region" title="This is for future expansion (no need to fill it out now)"/></td>
+			<td><sf:input class="north" path="country" title="This is for future expansion (no need to fill it out now)"/></td>
 		</tr>
 		<tr>
 			<td><div class="error">
@@ -61,9 +61,9 @@
 		</tr>
 		<tr>
 			<th>Password</th>
-			<td><sf:input path="password" type="password" id="password" class="control" name="password" /></td>
+			<td><sf:input class="north control" path="password" type="password" id="password" name="password" title="Please assign a password"/></td>
 			<th>Confirm</th>
-			<td><input id="confirmpass" class="control" name="confirmpass" type="password"></td>
+			<td><input class="north control" id="confirmpass" name="confirmpass" type="password" title="Type it again to verify it is correct" ></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>

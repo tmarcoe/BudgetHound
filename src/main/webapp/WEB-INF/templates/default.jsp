@@ -11,14 +11,21 @@
 <meta name="description" content="Budget Hound is on the job!">
 <meta name="keywords" content="budget">
 <title><tiles:insertAttribute name="title"></tiles:insertAttribute></title>
+
 <link rel="icon" href="<c:url value='/images/budgethoundlogo.png' />">
+
+<!-- Style Sheets for the various features -->
 <link href="/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="/css/jquery.powertip.css" rel="stylesheet" type="text/css" />
 
+<!-- Java scripts -->
 <script type="text/javascript" src="/script/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="/script/jquery-ui.js"></script>
+<script type="text/javascript" src="/script/jquery.powertip.js"></script>
 
 <script type="text/javascript" src="/script/Chart.js"></script>
+
 <sec:getPrincipal />
 <tiles:insertAttribute name="includes"></tiles:insertAttribute>
 
@@ -77,6 +84,53 @@
 		<tiles:insertAttribute name="content"></tiles:insertAttribute>
 	</div>
 	<tiles:insertAttribute name="footer" />
+	
+<script type="text/javascript">
+	$(function() {
+		// placement examples
+		$('.north').powerTip({
+			placement : 'n'
+		});
+		$('.east').powerTip({
+			placement : 'e'
+		});
+		$('.south').powerTip({
+			placement : 's'
+		});
+		$('.west').powerTip({
+			placement : 'w'
+		});
+		$('.north-west').powerTip({
+			placement : 'nw'
+		});
+		$('.north-east').powerTip({
+			placement : 'ne'
+		});
+		$('.south-west').powerTip({
+			placement : 'sw'
+		});
+		$('.south-east').powerTip({
+			placement : 'se'
+		});
+		$('.north-west-alt').powerTip({
+			placement : 'nw-alt'
+		});
+		$('.north-east-alt').powerTip({
+			placement : 'ne-alt'
+		});
+		$('.south-west-alt').powerTip({
+			placement : 'sw-alt'
+		});
+		$('.south-east-alt').powerTip({
+			placement : 'se-alt'
+		});
+	});
+	$(function() {
+		// mouse follow example
+		$('#mousefollow div').powerTip({ followMouse: true });
+	});
+
+</script>
 
 <script type="text/javascript">
 	function shutDown() {

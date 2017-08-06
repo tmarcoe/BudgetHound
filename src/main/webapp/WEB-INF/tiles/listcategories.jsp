@@ -5,8 +5,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <form id="listcat" action="/user/${parent}/createcategory" method="post">
-	
-	<h3>Parent: ${parent}</h3>
+	<c:choose>
+		<c:when test="${parent == 'root'}">
+			<c:set var="pTitle" value="'Top Level'" />
+		</c:when>
+		<c:otherwise>
+			<c:set var="pTitle" value="'Parent is the group category'" />
+		</c:otherwise>
+	</c:choose>
+	<div id="mousefollow">
+		<h3 class="north" title="${pTitle}">Parent: ${parent}</h3>
+	</div>
 	<div class="error">${error}</div>
 	<table class="tableview tableshadow tableborder rjfourth cjfifth">
 		<tr>
@@ -24,25 +33,27 @@
 		<c:forEach var="item" items="${objectList.pageList}">
 			<tr>
 				<td><c:set var="tst" value="${item.protect}" /> <c:if test="${not tst}">
-						<button type="button" onclick="remove('${item.category}','${parent}', ${item.id})">Delete</button>
+						<button class="north" type="button" onclick="remove('${item.category}','${parent}', ${item.id})" title="Delete this category">Delete</button>
 					</c:if>&nbsp;</td>
-				<td><button type="button" onclick="window.location.href='/user/${item.category}/listcategories'">Open</button></td>
-				<td>${item.category}</td>
-				<td><fmt:formatNumber type="currency" value="${item.amount}" currencySymbol="" />
-				<td>${item.protect}</td>
+				<td><button class="north" type="button" onclick="window.location.href='/user/${item.category}/listcategories'"
+						title="View/Add Subcategories">Open</button></td>
+				<td class="north" title="Category Name">${item.category}</td>
+				<td class="north" title="Total amount spent on this category"><fmt:formatNumber type="currency" value="${item.amount}" currencySymbol="" /> 
+				<td class="north" title="This category is system generated and cannot be deleted.">${item.protect}</td>
 			</tr>
 		</c:forEach>
 		<tfoot class="tablefooter">
 			<tr>
 				<c:choose>
 					<c:when test="${parent != 'root'}">
-						<td colspan="4"><button type="button" onclick="window.location.href='/user/${parent}/uponecat'">Up One Level</button></td>
+						<td colspan="4"><button class="north" type="button" onclick="window.location.href='/user/${parent}/uponecat'"
+								title="Go to the previous category">Up One Level</button></td>
 					</c:when>
 					<c:otherwise>
 						<td colspan="4">&nbsp;</td>
 					</c:otherwise>
 				</c:choose>
-				<td><button type="button" onclick="openPopup()">New Category</button></td>
+				<td><button class="north" type="button" onclick="openPopup()" title="Add a user defined category">New Category</button></td>
 			</tr>
 		</tfoot>
 	</table>
@@ -62,16 +73,19 @@
 			</table>
 		</div>
 
+
 	</div>
 </form>
+
 <script type="text/javascript">
+
 	function openPopup() {
 		var modal = document.getElementById('entercategory');
-		modal.style.display = "block"
+		modal.style.display = "block";
 	}
 	function closePopup() {
 		var modal = document.getElementById('entercategory');
-		modal.style.display = "none"
+		modal.style.display = "none";
 	}
 	function remove(name, parent, id) {
 		if (confirm("Do you really want to remove '" + name + "' from the list of categories.") == true) {

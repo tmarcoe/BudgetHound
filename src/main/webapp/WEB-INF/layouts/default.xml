@@ -64,11 +64,6 @@
 		<put-attribute name="heading_title" value="Edit Transaction" />
 		<put-attribute name="content" value="/WEB-INF/tiles/edittrans.jsp" />
 	</definition>
-	<definition name="picksubcategory" extends="layout.basic">
-		<put-attribute name="title" value="Pick A Subcategory" />
-		<put-attribute name="heading_title" value="Pick A Subcategory" />
-		<put-attribute name="content" value="/WEB-INF/tiles/picksubcategory.jsp" />
-	</definition>
 	<definition name="listcategories" extends="layout.basic">
 		<put-attribute name="title" value="Categories" />
 		<put-attribute name="heading_title" value="Categories" />
