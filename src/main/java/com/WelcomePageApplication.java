@@ -20,7 +20,7 @@ public class WelcomePageApplication implements CommandLineRunner  {
 
 		SpringApplication.run(WelcomePageApplication.class, args);
 		//TODO: Comment out laungBrower in live version 
-		WelcomePageApplication.launchBrowser();
+		//WelcomePageApplication.launchBrowser();
 	}
 	
 	@Override

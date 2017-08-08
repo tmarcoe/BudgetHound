@@ -77,6 +77,7 @@
 				modal : true,
 				buttons : {
 					"Yes" : function() {
+						$(this).dialog("close");
 						window.location.href = targetUrl;
 					},
 					"No" : function() {

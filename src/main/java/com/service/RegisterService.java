@@ -110,21 +110,26 @@ public class RegisterService implements IRegister {
 		return registerDao.getExpenseByCategory(household_id, category);
 	}
 	
-	public void archiveBudget(int household_id, int month) throws IOException {
+	public String archiveBudget(int household_id, int month) throws IOException {
+		
 		String[] colNames = {"entry_id", "household_id", "trans_date", "recipient", "description", "withdrawal", "deposit", "category", "running_balance",};
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String filePath = archiveDir + sdf.format(cal.getTime()) + "-" + String.format("%08d", household_id) + ".csv";
+		String archiveFile = sdf.format(cal.getTime()) + "-" + String.format("%08d", household_id) + ".csv";
+		String filePath = archiveDir + archiveFile;
 		Writer archive = new FileWriter(filePath);
 		CsvBeanWriter csvWriter = new CsvBeanWriter(archive, CsvPreference.STANDARD_PREFERENCE);
 		
 		List<Register> regList = registerDao.getTransactionsByMonth(household_id, month);
+		csvWriter.writeHeader(colNames);
 		for(Register reg : regList) {
 			csvWriter.write(reg, colNames);
 		}
 		csvWriter.close();
 		
 		registerDao.archivePreviousMonth(household_id, month);
+		
+		return archiveFile;
 	}
 	public boolean hasTransactions(int household_id, int month) {
 		return registerDao.hasTransactions(household_id, month);
