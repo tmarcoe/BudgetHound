@@ -229,7 +229,7 @@ public class RegisterDao implements IRegister {
 	}
 	
 	private Register getLastRecord(Session session, int household_id, int month) {
-		String hql = "FROM Register WHERE household_id = :household_id AND MONTH(trans_date) = :month ORDER BY entry_id DESC";
+		String hql = "FROM Register WHERE household_id = :household_id AND MONTH(trans_date) <= :month ORDER BY entry_id DESC";
 		Register reg = (Register) session.createQuery(hql).setInteger("household_id", household_id).setInteger("month", month).setMaxResults(1).uniqueResult();
 		
 		return reg;
@@ -239,7 +239,7 @@ public class RegisterDao implements IRegister {
 	private double totalMonth(Session session, int household_id, int month) {
 		double total = 0;
 		String hql = "FROM Register r, Categories c WHERE r.household_id = :household_id AND MONTH(trans_date) " +
-					 "= :month AND ((c.category = r.category AND c.parent = 'root') or deposit > 0) group by entry_id";
+					 "<= :month AND ((c.category = r.category AND c.parent = 'root') or deposit > 0) group by entry_id";
 		
 		List<Object[]> obj = session.createQuery(hql).setInteger("household_id", household_id).setInteger("month", month).list();
 		
@@ -251,12 +251,12 @@ public class RegisterDao implements IRegister {
 	}
 		
 	private void removeLastMonth(Session session, int month, int household_id) {
-		String hql = "DELETE FROM Register WHERE household_id = :household_id AND MONTH(trans_date) = :month";
+		String hql = "DELETE FROM Register WHERE household_id = :household_id AND MONTH(trans_date) <= :month";
 		session.createQuery(hql).setInteger("household_id", household_id).setInteger("month", month).executeUpdate();
 	}
 	public boolean hasTransactions(int household_id, int month) {
 		Session session = session();
-		String hql = "SELECT COUNT(*) FROM Register WHERE household_id = :household_id AND MONTH(trans_date) = :month";
+		String hql = "SELECT COUNT(*) FROM Register WHERE household_id = :household_id AND MONTH(trans_date) <= :month";
 		
 		Long count = (Long) session.createQuery(hql).setInteger("household_id", household_id).setInteger("month", month).uniqueResult();
 		session.disconnect();
@@ -324,7 +324,7 @@ public class RegisterDao implements IRegister {
 	@SuppressWarnings("unchecked")
 	public List<Register> getTransactionsByMonth(int household_id, int month) {
 		Session session = session();
-		String hql = "FROM Register WHERE household_id = :household_id AND MONTH(trans_date) = :month";
+		String hql = "FROM Register WHERE household_id = :household_id AND MONTH(trans_date) <= :month";
 		List<Register> regList = session.createQuery(hql).setInteger("household_id", household_id).setInteger("month", month).list();
 		
 		session.disconnect();
