@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.dao.CategoriesDao;
 import com.entity.Categories;
-
-import interfaces.ICategories;
+import com.interfaces.ICategories;
 
 @Service
 public class CategoriesService implements ICategories {

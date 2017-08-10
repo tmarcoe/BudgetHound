@@ -12,8 +12,7 @@ import com.dao.HouseholdDao;
 import com.entity.Categories;
 import com.entity.Household;
 import com.entity.Role;
-
-import interfaces.IHousehold;
+import com.interfaces.IHousehold;
 
 @Service
 public class HouseholdService implements IHousehold {

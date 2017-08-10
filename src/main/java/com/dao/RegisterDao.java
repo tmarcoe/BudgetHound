@@ -17,9 +17,8 @@ import org.springframework.stereotype.Repository;
 
 import com.entity.Categories;
 import com.entity.Register;
+import com.interfaces.IRegister;
 import com.service.CategoriesService;
-
-import interfaces.IRegister;
 
 @Transactional
 @Repository

@@ -20,8 +20,7 @@ import org.supercsv.prefs.CsvPreference;
 import com.dao.RegisterDao;
 import com.entity.Categories;
 import com.entity.Register;
-
-import interfaces.IRegister;
+import com.interfaces.IRegister;
 
 @Service
 public class RegisterService implements IRegister {

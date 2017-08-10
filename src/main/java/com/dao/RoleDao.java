@@ -12,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.entity.Role;
-
-import interfaces.IRole;
+import com.interfaces.IRole;
 
 @Transactional
 @Repository

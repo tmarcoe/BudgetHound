@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.dao.RoleDao;
 import com.entity.Role;
-
-import interfaces.IRole;
+import com.interfaces.IRole;
 
 @Service
 public class RoleService implements IRole {

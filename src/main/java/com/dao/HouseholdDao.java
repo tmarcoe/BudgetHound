@@ -12,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.entity.Household;
-
-import interfaces.IHousehold;
+import com.interfaces.IHousehold;
 
 @Transactional
 @Repository

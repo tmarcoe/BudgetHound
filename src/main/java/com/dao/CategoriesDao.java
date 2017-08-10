@@ -13,8 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.entity.Categories;
-
-import interfaces.ICategories;
+import com.interfaces.ICategories;
 
 @Transactional
 @Repository
